@@ -1,44 +1,44 @@
 {
-  "made": "2026-10-30T05:59:54Z",
+  "made": "2026-10-30T09:47:46Z",
   "apps": [
     {
       "id": "glen",
-      "version": "1.0.0",
-      "url": "https://github.com/Slavmarch/releases/releases/download/family-20261030-044938/Glen_1.0.0_x64-setup.exe",
-      "sha256": "1703c8952e831890d8f1abaa32aadf35454a705857b8e112a7332f568c3e3397",
-      "size": 6962133,
+      "version": "1.1.0",
+      "url": "https://github.com/Slavmarch/releases/releases/download/family-20261030-094746/Glen_1.1.0_x64-setup.exe",
+      "sha256": "8debcdbaf498853fbee9e2babc11f6a6d1064b17ec2737ea5f6b1dac48dedd6d",
+      "size": 6965222,
       "notes": ""
     },
     {
       "id": "header_ocr",
-      "version": "1.4.6",
-      "url": "https://github.com/Slavmarch/releases/releases/download/family-20261030-044938/OPTIC-Setup-1.4.6.exe",
-      "sha256": "f6bce84a02271068cb44ddaa59b3f8206e74ce26b0625b820339b812ee57b66c",
-      "size": 33200238,
+      "version": "1.5.0",
+      "url": "https://github.com/Slavmarch/releases/releases/download/family-20261030-094746/OPTIC-Setup-1.5.0.exe",
+      "sha256": "d8818f037fa4399adfbb67bcec4a28f764db3681ecb707d58a9f85b00806902f",
+      "size": 33198583,
       "notes": ""
     },
     {
       "id": "overmind",
-      "version": "1.0.0",
-      "url": "https://github.com/Slavmarch/releases/releases/download/family-20261030-044938/OVERMIND-Setup-1.0.0.exe",
-      "sha256": "397b29f02e5d580f28bf8c4b35fbd533d0633863d60eaee57573cf03e41fe945",
-      "size": 8449425,
+      "version": "1.1.0",
+      "url": "https://github.com/Slavmarch/releases/releases/download/family-20261030-094746/OVERMIND-Setup-1.1.0.exe",
+      "sha256": "95d69697f12243593085bdff9c834ed7d4e43b99f0ec2203fa5dbe5d9259eafa",
+      "size": 8541107,
       "notes": ""
     },
     {
       "id": "ovi_family",
-      "version": "0.1.1",
-      "url": "https://github.com/Slavmarch/releases/releases/download/family-20261030-055954/OVI-Family-Setup-0.1.1.exe",
-      "sha256": "d076473235bf4b5baa3254fcbfe7081bb2cf3e50852fe3c252808b3371d3d59d",
-      "size": 3972331,
+      "version": "1.1.0",
+      "url": "https://github.com/Slavmarch/releases/releases/download/family-20261030-094746/OVI-Family-Setup-1.1.0.exe",
+      "sha256": "3865c8348dbd1fd99ece171f52b27daf30ce03f449fdf4120b6950afee1f2cce",
+      "size": 3977058,
       "notes": ""
     },
     {
       "id": "parser",
-      "version": "1.0.0",
-      "url": "https://github.com/Slavmarch/releases/releases/download/family-20261030-044938/Parser-Setup-1.0.0.exe",
-      "sha256": "f94b77421511809cd8b726104625827da1f13a0b51189a99cc2192942fe9aaa9",
-      "size": 115625939,
+      "version": "1.1.0",
+      "url": "https://github.com/Slavmarch/releases/releases/download/family-20261030-094746/Parser-Setup-1.1.0.exe",
+      "sha256": "41f198df304b07f255087b2887ce9b35ffe4029733e17081a753400ec04af057",
+      "size": 116306425,
       "notes": ""
     }
   ]
