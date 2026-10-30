@@ -1,5 +1,5 @@
 {
-  "made": "2026-10-30T04:49:38Z",
+  "made": "2026-10-30T05:59:54Z",
   "apps": [
     {
       "id": "glen",
@@ -27,10 +27,10 @@
     },
     {
       "id": "ovi_family",
-      "version": "0.1.0",
-      "url": "https://github.com/Slavmarch/releases/releases/download/family-20261030-044938/OVI-Family-Setup-0.1.0.exe",
-      "sha256": "dd480dd3b5822bb0825b49522dd0452c08726a586e57157d740e2e683c2b3cf5",
-      "size": 3898903,
+      "version": "0.1.1",
+      "url": "https://github.com/Slavmarch/releases/releases/download/family-20261030-055954/OVI-Family-Setup-0.1.1.exe",
+      "sha256": "d076473235bf4b5baa3254fcbfe7081bb2cf3e50852fe3c252808b3371d3d59d",
+      "size": 3972331,
       "notes": ""
     },
     {
