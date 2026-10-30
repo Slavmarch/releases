@@ -1,11 +1,11 @@
 {
-  "version": "0.1.0",
-  "notes": "",
-  "pub_date": "2026-10-24T12:47:12Z",
+  "version": "0.1.1",
+  "notes": "업데이트가 잘 오는지 보는 시험판이에요.",
+  "pub_date": "2026-10-30T01:58:07Z",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUSjUxaVpGWE9HMlJzU3BkV1FRQ1FmbERxVFJsdjBLalhaQmM5QUxyMC8wTmJMNTNpenRrTWtXN1ZVc0o0ZFFBYWtPZ2ZJamV6L2txRk5YTkVvbGl0dnRwSUx2OU5handZPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzkyODQ2MDMwCWZpbGU6T1ZFUk1JTkRfMC4xLjBfeDY0LXNldHVwLmV4ZQl2ZXJzaW9uOjAuMS4wClNIQWxUK3djb3V2eFRlSzcvZDI3bXd6WmdRYUFXbXNXQmg5Mjh1T09jMW9GQ3JodWdOcGhxaFd3eDVxcUE1YXRtY1FqRGhnWWxGd3d2QS90dFh0bEJBPT0K",
-      "url": "https://github.com/Slavmarch/releases/raw/main/overmind/OVERMIND-Setup-0.1.0.exe"
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUSjUxaVpGWE9HMlhpTjg3UlJ2dFlaaXZoVU1EREJvMTdzaXRJWE1vT3luZ0FXcG5RQXMrRFNCQVV3VFJ4d25oOWdVR1g5ckw3SHJsRXMwNXVHZUpFV2xzYmwrWGFKRWc0PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzkzMzI1NDg3CWZpbGU6T1ZFUk1JTkRfMC4xLjFfeDY0LXNldHVwLmV4ZQl2ZXJzaW9uOjAuMS4xCkFVWERBQytremtjU1BSRnozSldhZU1jZDhabTBEdEhuekdiL1ZzUmt0OWJFRzhDYmZ1bVJjb2VkQ205WE00azllTFRYNG5GeG56d09BbTVLVU9NSERnPT0K",
+      "url": "https://github.com/Slavmarch/releases/raw/main/overmind/OVERMIND-Setup-0.1.1.exe"
     }
   }
 }
