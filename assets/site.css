@@ -77,3 +77,28 @@ h2 small { margin-left: 6px; color: var(--muted); font-weight: 500; }
   .app-desc { flex-basis: 100%; padding-left: 22px; }
 }
 @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+
+/* 앱 소개 쪽 (make_site_pages.py) */
+.nav { display: flex; flex-direction: column; gap: 2px; }
+.nav-label { margin: 14px 10px 4px; color: var(--muted); font: 600 11px/16px var(--font-sans); letter-spacing: 0.08em; }
+.nav-item.app .app-dot { margin: 0 4px; }
+.nav-item.app[aria-current="page"] { background: color-mix(in srgb, var(--app) 16%, transparent); color: var(--text); }
+a.line.link { color: inherit; text-decoration: none; margin: 0 -10px; padding: 10px; border-radius: 10px; }
+a.line.link + a.line.link { border-top: 0; }
+a.line.link:hover { background: rgba(128, 128, 128, 0.12); }
+.go { margin-left: auto; color: var(--muted); font-size: 22px; }
+.band-kicker { margin: 0 0 6px; color: var(--accent); font: 700 13px/18px var(--font-sans); letter-spacing: 0.16em; text-transform: uppercase; }
+.lead { margin: 0 0 14px; font-size: 16px; line-height: 27px; }
+.feats { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; }
+.feat { padding: 14px 16px; border-radius: 12px; background: var(--surface); border-top: 2px solid var(--accent); }
+.feat h3 { margin: 0 0 4px; font: 700 14px/20px var(--font-sans); }
+.feat p { margin: 0; color: var(--muted); font-size: 13px; line-height: 20px; }
+.chip.ghost { background: transparent; border: 1px solid var(--border); color: var(--muted); font-weight: 500; }
+.chip.off { background: color-mix(in srgb, var(--accent) 22%, transparent); color: var(--text); cursor: default; }
+.chip .app-dot { margin-right: 8px; }
+@media (max-width: 760px) {
+  .nav { flex-direction: row; flex-wrap: wrap; gap: 4px; width: 100%; order: 3; }
+  .nav-label { display: none; }
+  .nav-item.app .app-dot { margin: 0 2px 0 0; }
+  .feats { grid-template-columns: 1fr; }
+}
