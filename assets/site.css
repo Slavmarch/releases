@@ -247,3 +247,16 @@ html.intro-on .intro { position: fixed; inset: 0; z-index: 100; display: flex; f
 .notes-app { scroll-margin-top: 16px; }
 .note-tab[aria-selected="true"] { background: var(--app); color: var(--on, #fff); box-shadow: 0 8px 20px -10px var(--app); }
 .note-tab[aria-selected="true"] .chip-icon { box-shadow: 0 0 0 1.5px rgba(255,255,255,.7); }
+.note-old-h { margin: 8px 0 0; font: 700 12px/16px var(--font-sans); color: var(--muted); letter-spacing: .06em; }
+.note-old { border-radius: 12px; background: var(--surface); }
+.note-old summary { display: flex; align-items: center; gap: 10px; padding: 12px 16px; cursor: pointer; list-style: none; }
+.note-old summary::-webkit-details-marker { display: none; }
+.note-old summary::after { content: "›"; margin-left: auto; color: var(--muted); font-size: 18px; transition: transform .2s ease; }
+.note-old[open] summary::after { transform: rotate(90deg); }
+.note-old .note-v { font-size: 14px; }
+.note-peek { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--muted); font-size: 13px; }
+.note-old[open] .note-peek { visibility: hidden; }
+.note-old .note-sum { margin: 0 16px; }
+.note-old ul { margin: 8px 16px 0; padding-left: 18px; color: var(--muted); font-size: 13px; line-height: 21px; }
+.note-old ul { padding-bottom: 14px; }
+.note-none { margin: 0; color: var(--muted); font-size: 13px; }
