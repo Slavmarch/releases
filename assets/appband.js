@@ -204,7 +204,7 @@ export class Band {
     const [r, g, b] = this.tint;
     // 봇 자리: 오른쪽, 높이의 78% (104 까지) — Parser band.py 와 같음
     const cols = Math.floor(w / STEP);
-    const mid = cols - Math.round(Math.min(150, w * 0.22) / STEP);
+    const mid = Math.round(cols / 2);  // 사이트: 따로 떠 있는 화면이라 가운데 (앱 창 띠는 오른쪽)
     const s = Math.min(104, h * 0.78);
     this.bot = { x: mid * STEP - s / 2, y: h / 2 - s / 2, s };
     // 봇 둘레가 대표색으로 은은하게 (하위 앱)

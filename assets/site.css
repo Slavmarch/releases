@@ -153,17 +153,36 @@ a.line.link:hover { background: rgba(128, 128, 128, 0.12); }
   .app-card .app-icon { margin: 0; width: 44px; height: 44px; } .app-card .app-name { flex: 1; } .app-card .app-desc { flex-basis: 100%; } .app-more { display: none; } }
 .title-en { margin-left: 12px; font: 500 15px/20px var(--font-sans); letter-spacing: 0; color: var(--muted); }
 
-/* 첫 화면 들어올 때 모토 (탭마다 한 번, 2.1초 뒤 저절로 사라짐) */
-.intro { position: fixed; inset: 0; z-index: 100; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
-  background: radial-gradient(60% 50% at 50% 55%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 70%), #141518;
-  cursor: pointer; animation: intro-out .55s ease 2.1s forwards; }
+/* 첫 화면 들어올 때 — 모토 + 봇 카드 고리 + 들어가기 (탭마다 한 번) */
+.intro { display: none; }
+html.intro-on, html.intro-on body { overflow: hidden; }
+html.intro-on .intro { position: fixed; inset: 0; z-index: 100; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 24px 16px; background: radial-gradient(60% 45% at 50% 62%, color-mix(in srgb, var(--accent) 20%, transparent), transparent 72%), #141518; }
 .intro.gone { animation: intro-out .45s ease forwards; }
-.intro-brand { margin: 0; color: var(--muted); font: 700 13px/18px var(--font-sans); letter-spacing: .32em; text-transform: uppercase;
-  opacity: 0; animation: intro-in .7s ease .1s forwards; }
-.intro-motto { margin: 0; padding: 0 24px; text-align: center; text-wrap: balance; color: var(--text); font: 800 clamp(30px, 6vw, 56px)/1.15 var(--font-sans); letter-spacing: -0.02em;
-  opacity: 0; animation: intro-in .8s ease .35s forwards; }
-.intro-line { width: 0; height: 2px; margin-top: 14px; border-radius: 1px; background: var(--accent); animation: intro-grow 1.1s ease .6s forwards; }
+.intro-brand { margin: 0; color: var(--muted); font: 700 13px/18px var(--font-sans); letter-spacing: .32em; text-transform: uppercase; animation: intro-in .7s ease both; }
+.intro-motto { margin: 10px 0 0; text-align: center; text-wrap: balance; color: var(--text); font: 800 clamp(30px, 5.4vw, 52px)/1.15 var(--font-sans);
+  letter-spacing: -0.02em; animation: intro-in .8s ease .15s both; }
+.ring { position: relative; width: min(100%, 860px); height: 300px; margin-top: clamp(20px, 5vh, 44px); perspective: 1100px; touch-action: pan-y;
+  cursor: grab; outline: none; animation: intro-in .8s ease .35s both; }
+.ring.drag { cursor: grabbing; }
+.ring-card { position: absolute; left: 50%; top: 0; width: 230px; margin-left: -115px; padding: 12px 12px 16px; border-radius: 20px; text-align: center;
+  background: radial-gradient(120% 70% at 50% 0%, color-mix(in srgb, var(--app) 22%, transparent), transparent 70%), var(--surface);
+  border: 1px solid color-mix(in srgb, var(--app) 28%, var(--border)); box-shadow: 0 18px 40px -18px rgba(0,0,0,.7);
+  transition: transform .5s cubic-bezier(.2,.8,.2,1), opacity .5s ease, filter .5s ease; user-select: none; }
+.ring.drag .ring-card { transition: none; }
+.ring-card.on { box-shadow: 0 20px 48px -16px color-mix(in srgb, var(--app) 60%, transparent); }
+.ring-screen { position: relative; height: 150px; border-radius: 14px; background: #000; overflow: hidden; }
+.ring-screen canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.ring-name { margin: 14px 0 0; font: 800 18px/24px var(--font-sans); color: var(--text); }
+.ring-desc { margin: 4px 0 0; word-break: keep-all; font-size: 13.5px; line-height: 20px; color: var(--muted); text-wrap: balance; }
+.ring-dots { display: flex; gap: 8px; margin-top: 4px; animation: intro-in .8s ease .45s both; }
+.ring-dot { width: 8px; height: 8px; padding: 0; border: 0; border-radius: 4px; background: rgba(255,255,255,.22); cursor: pointer; transition: width .3s ease, background .3s ease; }
+.ring-dot.on { width: 22px; background: var(--dot, var(--accent)); }
+.intro-enter { margin-top: clamp(20px, 4vh, 34px); height: 46px; padding: 0 34px; border: 0; border-radius: 23px; cursor: pointer;
+  background: var(--accent); color: var(--on-accent); font: 700 16px/46px var(--font-sans); animation: intro-in .8s ease .55s both;
+  box-shadow: 0 10px 30px -10px color-mix(in srgb, var(--accent) 80%, transparent); transition: transform .15s ease, background .15s ease; }
+.intro-enter:hover { transform: translateY(-1px); background: color-mix(in srgb, var(--accent) 86%, #fff); }
+.intro-enter:focus-visible, .ring:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
 @keyframes intro-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
-@keyframes intro-grow { to { width: 120px; } }
-@keyframes intro-out { to { opacity: 0; visibility: hidden; pointer-events: none; } }
-@media (prefers-reduced-motion: reduce) { .intro { display: none; } }
+@keyframes intro-out { to { opacity: 0; visibility: hidden; } }
+@media (max-width: 760px) { .ring { height: 270px; } .ring-card { width: 200px; margin-left: -100px; } .ring-screen { height: 128px; } }
