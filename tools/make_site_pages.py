@@ -176,7 +176,7 @@ def side(base, current):
     nav.append(f'<div class="nav-label">{T("정보", "Info")}</div>')
     nav.append(f'<a class="nav-item" href="{base}notes/"{cur("notes")}>{ICON["notes"]}{T("변경점", "Release notes")}</a>')
     nav.append(f'<div class="nav-label">{T("도움", "Help")}</div>')
-    nav.append(f'<a class="nav-item" href="{r}legal/">{ICON["legal"]}{T("약관", "Legal")}</a>')
+    nav.append(f'<a class="nav-item" href="{r}legal/{T("", "index-en.html")}">{ICON["legal"]}{T("약관", "Legal")}</a>')
     nav.append(f'<a class="nav-item" href="#contact">{ICON["mail"]}{T("문의", "Contact")}</a>')
     return (f'<aside class="side"><a class="brand" href="{base or "./"}" aria-label="Lagoonworks"><img src="{r}assets/icons/overmind.png?v={V["icons"]}" alt="" width="30" height="30">'
             f'<span class="brand-name">LAGOONWORKS</span></a>{lang_switch(base, current, "lang side-lang")}<nav class="nav">{"".join(nav)}</nav>'
