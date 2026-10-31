@@ -121,3 +121,33 @@ a.line.link:hover { background: rgba(128, 128, 128, 0.12); }
   .nav-item.app .app-dot { margin: 0 2px 0 0; }
   .feats { grid-template-columns: 1fr; }
 }
+
+/* 앱 카드 — 앱마다 대표색이 은은히 번지는 둥근 카드 */
+.app-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin-top: 4px; }
+@media (min-width: 900px) { .app-grid { grid-template-columns: repeat(2, 1fr); } .app-card.hub { grid-column: span 2; } }
+@media (min-width: 1100px) { .app-grid { grid-template-columns: repeat(3, 1fr); } }
+.app-card.hub { background: radial-gradient(90% 120% at 0% 0%, color-mix(in srgb, var(--app) 30%, transparent), transparent 65%), var(--surface); }
+.hub-tag { position: absolute; top: 18px; right: 18px; height: 24px; padding: 0 10px; border-radius: 12px; font: 600 12px/24px var(--font-sans);
+  background: color-mix(in srgb, var(--app) 20%, transparent); color: color-mix(in srgb, var(--app) 62%, #fff); }
+.app-card { position: relative; display: flex; flex-direction: column; gap: 4px; padding: 18px 18px 16px; border-radius: 16px;
+  color: inherit; text-decoration: none; overflow: hidden;
+  background: radial-gradient(120% 90% at 0% 0%, color-mix(in srgb, var(--app) 24%, transparent), transparent 62%), var(--surface);
+  border: 1px solid color-mix(in srgb, var(--app) 22%, var(--border));
+  transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease; }
+.app-card:hover { transform: translateY(-3px); border-color: color-mix(in srgb, var(--app) 55%, var(--border));
+  box-shadow: 0 12px 28px -12px color-mix(in srgb, var(--app) 55%, transparent); }
+.app-card:focus-visible { outline: 2px solid var(--app); outline-offset: 2px; }
+.app-icon { width: 52px; height: 52px; border-radius: 12px; margin-bottom: 10px;
+  box-shadow: 0 6px 18px -6px color-mix(in srgb, var(--app) 70%, transparent); transition: transform .18s ease; }
+.app-card:hover .app-icon { transform: rotate(-4deg) scale(1.04); }
+.app-card .app-name { font-size: 17px; font-weight: 700; line-height: 24px; }
+.app-card .app-desc { color: var(--text); font-size: 14px; line-height: 21px; }
+.app-card .app-desc span { margin-top: 2px; font-size: 12.5px; line-height: 18px; color: var(--muted); }
+.app-more { margin-top: auto; padding-top: 12px; font-size: 13px; font-weight: 600; color: color-mix(in srgb, var(--app) 62%, #fff); }
+.app-more span { display: inline-block; transition: transform .18s ease; }
+.app-card:hover .app-more span { transform: translateX(3px); }
+.chip-icon { width: 20px; height: 20px; border-radius: 5px; margin-right: 8px; }
+.kicker-icon { width: 28px; height: 28px; border-radius: 7px; margin-right: 10px; vertical-align: -9px; }
+@media (prefers-reduced-motion: reduce) { .app-card, .app-icon, .app-more span { transition: none; } .app-card:hover { transform: none; } }
+@media (max-width: 760px) { .app-grid { grid-template-columns: 1fr; } .app-card { flex-direction: row; flex-wrap: wrap; align-items: center; column-gap: 14px; }
+  .app-card .app-icon { margin: 0; width: 44px; height: 44px; } .app-card .app-name { flex: 1; } .app-card .app-desc { flex-basis: 100%; } .app-more { display: none; } }
