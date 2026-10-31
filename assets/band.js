@@ -296,7 +296,7 @@ var Band = class {
     };
     const cols = Math.floor(w / STEP);
     const rows = Math.floor(h / STEP);
-    const mid = cols - Math.round(Math.min(150, w * 0.22) / STEP);
+    const mid = Math.round(cols / 2);  // 사이트: 띠 안 따로 떠 있는 화면이라 가운데 (노치 설정 창은 오른쪽)
     const top = Math.round(rows / 2) - 6;
     const gx = Math.round(this.eyes.x * 2);
     const hop = t - this.hopAt < 0.32 ? Math.round(2 * Math.sin(Math.PI * (t - this.hopAt) / 0.32)) : 0;

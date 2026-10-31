@@ -84,9 +84,9 @@ h2 small { margin-left: 6px; color: var(--muted); font-weight: 500; }
   .nav-item svg, .side-foot { display: none; }
   .scroll { padding: 16px 16px 32px; }
   .band { min-height: 190px; padding: 22px 18px; }
-  .screen { top: auto; left: 12px; right: 12px; bottom: 12px; width: auto; height: 74px; }
+  .screen { top: auto; left: 12px; right: 12px; bottom: 12px; width: auto; height: 108px; }
   .head { display: none; }
-  .band-text { max-width: 100%; padding-bottom: 84px; }
+  .band-text { max-width: 100%; padding-bottom: 118px; }
   .band-btn { margin-top: 12px; }
   .band-en { display: none; }
   h1 { font-size: 26px; line-height: 32px; }
