@@ -209,3 +209,15 @@ html.intro-on .intro { position: fixed; inset: 0; z-index: 100; display: flex; f
   box-shadow: 0 8px 22px -10px color-mix(in srgb, var(--accent) 80%, transparent); transition: background .15s ease, transform .15s ease; }
 .head-dl:hover { background: color-mix(in srgb, var(--accent) 86%, #fff); transform: translateY(-1px); }
 .head-dl svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+
+/* 바뀐 것 (패치노트) — 노치 업데이트 관리와 같은 재료 */
+.notes { display: grid; gap: 10px; }
+.note-ver { padding: 14px 16px; border-radius: 12px; background: var(--surface); border-left: 3px solid var(--border); }
+.note-ver.now { border-left-color: var(--accent); }
+.note-head { display: flex; align-items: center; gap: 10px; margin: 0; }
+.note-v { font: 800 16px/22px var(--font-sans); color: var(--text); }
+.note-d { font-size: 12.5px; color: var(--muted); }
+.note-new { height: 20px; padding: 0 8px; border-radius: 10px; font: 700 11px/20px var(--font-sans);
+  background: color-mix(in srgb, var(--accent) 22%, transparent); color: color-mix(in srgb, var(--accent) 62%, #fff); }
+.note-sum { margin: 6px 0 0; font-size: 14px; line-height: 21px; color: var(--text); }
+.note-ver ul { margin: 8px 0 0; padding-left: 18px; color: var(--muted); font-size: 13px; line-height: 21px; }
