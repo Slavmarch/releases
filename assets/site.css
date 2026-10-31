@@ -239,3 +239,9 @@ html.intro-on .intro { position: fixed; inset: 0; z-index: 100; display: flex; f
 .foot-bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--border);
   color: var(--muted); font-size: 12px; }
 @media (max-width: 1000px) { .foot-cols { grid-template-columns: repeat(2, 1fr); } .foot-brand { grid-column: 1 / -1; } }
+.notes-title { display: flex; align-items: center; gap: 10px; }
+.notes-title a { color: var(--text); text-decoration: none; }
+.notes-title a:hover { color: var(--app); }
+.notes-app .note-ver.now { border-left-color: var(--app); }
+.notes-app .note-new { background: color-mix(in srgb, var(--app) 22%, transparent); color: color-mix(in srgb, var(--app) 62%, #fff); }
+.notes-app { scroll-margin-top: 16px; }
