@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><link rel="icon" href="/favicon.png" type="image/png"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Privacy Policy · Lagoonworks</title><style>
+@font-face{font-family:"Pretendard";src:url("/assets/PretendardVariable.woff2") format("woff2");font-weight:100 900;font-display:swap}
+:root{--bg:#1b1c20;--surface:#2a2c31;--hover:#383b41;--panel:#202226;--text:#e6e8eb;--muted:#9399a1;--border:#2f3238;--accent:#a78bfa;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.75 "Pretendard","Segoe UI","Malgun Gothic","Apple SD Gothic Neo",-apple-system,sans-serif}
+main{max-width:760px;margin:0 auto;padding:28px 16px 64px}
+nav{font-size:14px;margin-bottom:28px;display:flex;gap:8px;flex-wrap:wrap}
+nav a{display:inline-flex;align-items:center;height:32px;padding:0 12px;border-radius:8px;background:var(--surface);color:var(--text);font-weight:600;text-decoration:none}
+nav a:hover{background:var(--hover)}
+nav a:first-child{background:transparent;padding-left:0;color:var(--accent)}
+a{color:var(--accent);text-underline-offset:3px}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+h1{font-size:28px;line-height:1.3;margin:0 0 8px;font-weight:800}
+h2{font-size:18px;margin:36px 0 8px}
+p,li{overflow-wrap:anywhere}
+.date{color:var(--muted);margin:0 0 24px}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:18px 22px;margin:12px 0}
+table{border-collapse:collapse;width:100%;font-size:14px;display:block;overflow-x:auto}
+th,td{border:1px solid var(--border);padding:6px 8px;text-align:left;vertical-align:top}
+th{background:var(--panel)}
+ul ul,ol ul{margin:4px 0}
+.draft{margin:0 0 18px;padding:12px 14px;border-radius:10px;border:1px solid #f59e0b55;background:#f59e0b1a;font-size:14px;line-height:22px}</style></head><body><main><nav><a href="/">Lagoonworks</a><a href="index.html">목록 · Index</a><a href="terms-ko.html">이용약관</a><a href="privacy-ko.html">개인정보 처리방침</a><a href="terms-en.html">Terms</a><a href="privacy-en.html">Privacy Policy</a></nav><p class="draft"><strong>초안 · Draft</strong> — 아직 시행 전이에요. 시행일과 일부 내용은 바뀔 수 있어요. Not yet in effect; the effective date and some details may change.</p><h1>Privacy Policy</h1>
+<p class="date">Effective date: [2026-__-__]</p>
+<p>Lagoonworks ("the Operator") makes and distributes OVERMIND, Ovi Family, Parser, Optic and Glen (together, "the Apps"). This policy explains how the Apps handle personal information.</p>
+<h2>1. Summary</h2>
+<ul>
+<li>The Operator does not offer sign-up or accounts and does not use ad tracking or usage analytics. <strong>The Operator does not run any server that receives and stores information from the Apps.</strong> The one exception is when the user presses [Send] in [Report a bug]; what is sent is not stored and is forwarded to the Operator's support mailbox (section 2).</li>
+<li>App installers and updates are downloaded from GitHub. GitHub gives the Operator only totals, such as download counts, and does not tell the Operator who downloaded a file.</li>
+<li>Information the Apps handle is stored <strong>on the user's own computer</strong>.</li>
+<li>Only for features the user turns on (AI, weather, calendar and the like) do the Apps send information <strong>directly from the user's computer to the company providing that service.</strong> The Operator neither sees nor receives it.</li>
+</ul>
+<h2>2. Personal information the Operator collects</h2>
+<p>The Operator does not collect personal information through the Apps.</p>
+<p>Exception: if the user <strong>chooses to send</strong> the Operator a file made with Ovi Family's [Collect logs] or an e-mail asking for help, the Operator uses what it contains (app versions, operating system, error logs, the sender's e-mail address) only to answer that request, and destroys it without delay once the request is closed. The file is made on the user's computer and sent by the user; logs that hold text the user wrote (such as Parser's text-recognition log) are left out, and the user can open the file before sending it.</p>
+<p>Reports sent with [Report a bug] (added 2026-10-31, for the next effective version): the information below is sent only when the user presses [Send] in Ovi Family's [Report a bug]. Nothing is sent before that, and the user can see the list of logs and open the file before sending.</p>
+<table><thead><tr><th>Item</th><th>Required</th><th>Purpose</th><th>Retention</th></tr></thead><tbody>
+<tr><td>App name and version, operating system</td><td>Required</td><td>Finding the cause of the error</td><td>Destroyed without delay once the request is closed</td></tr>
+<tr><td>Error and activity logs (the same file as [Collect logs] above: AI keys, e-mail addresses, user names and file names are hidden, and logs that hold text the user wrote are left out)</td><td>Required</td><td>Finding the cause of the error</td><td>Same</td></tr>
+<tr><td>What the user writes under "What happened?"</td><td>Optional</td><td>Finding the cause of the error</td><td>Same</td></tr>
+<tr><td>E-mail address for a reply</td><td>Optional (only if entered)</td><td>Replying</td><td>Same</td></tr>
+<tr><td>IP address of the sending computer</td><td>Required (needed to communicate)</td><td>Refusing more than 3 reports a minute from the same place</td><td>Not stored (the forwarding server counts only within that minute)</td></tr>
+</tbody></table>
+<p>The receiving server (Cloudflare Workers) does not store what it receives; it turns it into one e-mail and forwards it to the Operator's support mailbox. A user who does not want to send it can simply not press [Send]; the Apps keep working as before.</p>
+<h2>3. Information stored only on the user's computer</h2>
+<p>The following is stored only on the user's computer (Windows: the app's folder under %APPDATA%; Mac: the app's folder under ~/Library/Application Support) and is never sent to the Operator.</p>
+<table><thead><tr><th>App</th><th>What is stored</th><th>How long</th></tr></thead><tbody>
+<tr><td>All Apps</td><td>AI service keys and calendar addresses, in the operating system's secure store (Windows Credential Manager, macOS Keychain)</td><td>Until the user deletes them</td></tr>
+<tr><td>All Apps</td><td>Error and start-up logs (Parser's text-recognition log, ocr_missed.log, keeps part of the recognized text)</td><td>Until the app's folder is deleted. Some logs discard older lines as they grow (Optic and Parser error logs switch to a new file after 300 KB and keep one old file; the Glen log after 512 KB)</td></tr>
+<tr><td>OVERMIND</td><td>Schedule, to-dos, focus-time records, settings, weather place (latitude and longitude rounded to two decimal places, about 1 km, and its name), sound recordings and their transcripts</td><td>Until the user deletes them</td></tr>
+<tr><td>OVERMIND</td><td>Clipboard history</td><td>Memory only; gone when the app closes</td></tr>
+<tr><td>OVERMIND</td><td>(If AI task watching is on) a notification hook added to the settings files of Claude Code, Codex or Gemini CLI — written only after a backup and the user's confirmation</td><td>Until the feature is turned off</td></tr>
+<tr><td>Parser</td><td>Paths and first-page previews of recently opened files, Ask Parser conversations (per PDF), unfinished text-recognition results (page images and recognized text), backups of PDFs taken before saving</td><td>Unfinished recognition results 30 days; the latest 20 backups; the rest until the user deletes them</td></tr>
+<tr><td>Optic</td><td>Settings; captures and text the user saved</td><td>The capture list (latest 30) is memory only; saved files until the user deletes them</td></tr>
+<tr><td>Glen</td><td>For files in the watched folders (the whole Downloads folder, the top level of the Desktop, the Glen folder): path, name, size, dates, type, the name of the site it was downloaded from, and the labels and stars the user added</td><td>Until the user deletes them</td></tr>
+</tbody></table>
+<p>Glen <strong>does not open the contents of files.</strong> It reads only the site name from the information the operating system attaches to downloaded files, and only the operating system's list of items in the Recycle Bin.</p>
+<h2>4. Information sent to other services, depending on features the user turns on</h2>
+<p>These transfers happen <strong>only when the user turns on or runs the feature</strong>, and go directly from the user's computer to the company named. Each company handles the information under its own privacy policy.</p>
+<table><thead><tr><th>Recipient (country)</th><th>What is sent</th><th>When</th><th>App</th></tr></thead><tbody>
+<tr><td>Google LLC (USA) — Gemini</td><td>Questions and text the user sends; captured or opened pictures; PDF page images and text</td><td>When the user has entered a Gemini key and uses an AI feature</td><td>OVERMIND, Parser, Optic</td></tr>
+<tr><td>Anthropic PBC (USA) — Claude</td><td>Same as above</td><td>When the user has entered a Claude key and uses it</td><td>OVERMIND, Parser, Optic</td></tr>
+<tr><td>OpenAI (USA) — GPT</td><td>Same as above</td><td>When the user has entered a GPT key and uses it</td><td>OVERMIND, Parser, Optic</td></tr>
+<tr><td>An AI address the user typed in</td><td>Questions and text the user sends</td><td>Only when the user connects one in developer mode</td><td>OVERMIND</td></tr>
+<tr><td>Open-Meteo (Germany)</td><td>Latitude and longitude rounded to two decimal places (about 1 km), or a place name the user typed</td><td>When the weather feature is on</td><td>OVERMIND</td></tr>
+<tr><td>OpenStreetMap Foundation (UK) — Nominatim</td><td>Latitude and longitude rounded to two decimal places (about 1 km), to find the place name</td><td>Only when the user presses [Find my location]</td><td>OVERMIND</td></tr>
+<tr><td>The calendar service the user linked</td><td>A request to read that calendar address</td><td>When the schedule is refreshed</td><td>OVERMIND</td></tr>
+<tr><td>GitHub (USA)</td><td>Requests to check for updates and notices of changed terms, and to download updates (the IP address is visible in the request)</td><td>One minute after start, then once a day, and when installing</td><td>OVERMIND, Ovi Family</td></tr>
+<tr><td>GitHub and Hugging Face (USA)</td><td>Requests to download the speech-recognition engine and model (IP address)</td><td>When speech recognition is first turned on</td><td>OVERMIND</td></tr>
+</tbody></table>
+<ul>
+<li>The App never looks up the location on its own. When OVERMIND is first started, the island at the top of the screen asks "Show the weather for my location?" and names where the data goes (Open-Meteo, OpenStreetMap); the location is looked up only if the user presses [Find my location]. If the user presses [No thanks], the weather stays off and the question is not asked again; the user may instead type a place name.</li>
+<li>The precise location is given to the App by the operating system (Windows location service) after the operating system asks the user's permission; the App stores and sends only the value rounded to two decimal places (about 1 km).</li>
+<li>AI services are used with the user's own key (account); fees and data terms are governed by the agreement between the user and that company. In particular, <strong>under Google's Gemini API terms, content sent with a key used free of charge may be used by Google to improve its products and may be read by human reviewers</strong> (as of October 2026; Google's current terms apply). For sensitive documents, use built-in text recognition (Parser) instead of AI features, or a paid key.</li>
+<li>Glen sends nothing over the internet.</li>
+<li>Information exchanged between the Apps (between OVERMIND and the other Apps) stays on the same computer and within the same user account.</li>
+</ul>
+<h2>5. Provision to third parties and outsourcing</h2>
+<p>The Operator does not provide personal information to third parties. The transfers in section 4 happen on the user's computer as a result of features the user turned on.</p>
+<p><strong>Outsourcing and transfer abroad (only for receiving support requests and [Report a bug], added 2026-10-31, for the next effective version, ⚖ to be checked)</strong></p>
+<table><thead><tr><th>Recipient</th><th>Country</th><th>Task</th><th>Items transferred</th><th>When and how</th><th>Retention</th></tr></thead><tbody>
+<tr><td>Cloudflare, Inc. (contact: ⚖ privacy contact to be confirmed)</td><td>United States (processed at the data center nearest the request)</td><td>Receiving [Report a bug] and forwarding it by e-mail; forwarding e-mail sent to support@lagoonworks.app</td><td>Items in the table in section 2; support e-mail</td><td>Over the internet when the user presses [Send] or sends an e-mail</td><td>Not stored (forwarding only)</td></tr>
+<tr><td>Google LLC (Gmail)</td><td>United States</td><td>Keeping the Operator's support mailbox</td><td>Items in the table in section 2; support e-mail</td><td>Right after the forwarding above</td><td>Deleted without delay once the request is closed</td></tr>
+</tbody></table>
+<p>A user who does not want information transferred abroad can simply not use [Report a bug] or support e-mail. Other features of the Apps are not affected.</p>
+<h2>6. Deleting information</h2>
+<p>There is nothing to delete on any server of the Operator. Information on the user's computer can be deleted by:</p>
+<ul>
+<li>One item at a time: deleting the item (an event, a recording, a conversation and so on) in each App.</li>
+<li>Everything an App has stored: pressing [Delete all records] in that App deletes its folder listed in section 3 and closes the App (in OVERMIND, Parser and Optic under 'About' in settings; in Glen at the lower left of its window). This is the way to do it on a Mac.</li>
+<li>When uninstalling (Windows): Parser and Optic ask during uninstallation whether to delete the records as well; OVERMIND, Glen and Ovi Family delete the App's folder if "Delete the application data" is ticked in the uninstall window; when uninstalling from Ovi Family, they delete it if "Also delete my records" is ticked. If the user does not choose this, the folder remains.</li>
+<li>AI keys: these are not deleted by the methods above, because several Apps share them. Delete them with [Delete] under 'AI connections' in OVERMIND settings, or delete the 'OVERMIND' entries in the operating system's secure store.</li>
+<li>Files the user saved (PDFs, captures, files in the Glen folder and so on) are not deleted by the methods above.</li>
+</ul>
+<h2>7. Children under 14</h2>
+<p>The Apps have no accounts and the Operator does not receive personal information, so the Apps do not check age. [This section will change if paid plans or accounts are added.]</p>
+<h2>8. Security measures</h2>
+<ul>
+<li>AI keys are kept only in the operating system's secure store; only the last four characters are shown on screen, and Optic and Parser mask keys in error logs.</li>
+<li>OVERMIND installs an update only if the Operator's signature on it is valid. Ovi Family checks a list signed by the Operator and installs a downloaded installer only if its SHA-256 fingerprint matches that list.</li>
+<li>On Windows, the channel between the Apps is restricted so that only the user account that created it can open it; on Mac, the hub accepts connections only from the same user account (not yet tested on a Mac).</li>
+</ul>
+<h2>9. Contact</h2>
+<p>Privacy enquiries: Lagoonworks · support@lagoonworks.app</p>
+<h2>10. Changes to this policy</h2>
+<p>If this policy changes, notice is given in the in-app news of OVERMIND (a notice on the island at the top of the screen) and on the Operator's legal page (<a href="https://lagoonworks.app/legal/">https://lagoonworks.app/legal/</a>) from 7 days before the change takes effect. Earlier versions of this policy remain on that page, listed by effective date.</p>
+<p>If this English version and the Korean version differ, the Korean version prevails.</p></main></body></html>
