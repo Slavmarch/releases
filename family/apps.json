@@ -1,5 +1,5 @@
 {
-  "made": "2026-10-31T14:13:25Z",
+  "made": "2026-10-31T15:08:04Z",
   "apps": [
     {
       "id": "glen",
@@ -24,12 +24,20 @@
     },
     {
       "id": "header_ocr",
-      "version": "1.6.0",
-      "url": "https://github.com/Slavmarch/releases/releases/download/family-20261031-141324/OPTIC-Setup-1.6.0.exe",
-      "sha256": "cf8a7a188954c101308c5450361f3215489993323f36205baf65ca8a96bcbdcc",
-      "size": 33250113,
-      "notes": "이용약관 동의와 내 기록 지우기가 생겼어요",
+      "version": "1.6.1",
+      "url": "https://github.com/Slavmarch/releases/releases/download/family-20261031-150804/OPTIC-Setup-1.6.1.exe",
+      "sha256": "3489ce0ae2d2e4dfc2dd9dcd58fab99c9b66cbc655a489171a02c99d33fa94a4",
+      "size": 33250551,
+      "notes": "업데이트 설치가 멈추던 것을 고쳤어요",
       "history": [
+        {
+          "version": "1.6.1",
+          "date": "2026-10-31",
+          "summary": "업데이트 설치가 멈추던 것을 고쳤어요",
+          "lines": [
+            "업데이트할 때 Optic 이 트레이에 남아 있어 설치가 끝나지 않던 것을 고쳤어요"
+          ]
+        },
         {
           "version": "1.6.0",
           "date": "2026-10-31",
@@ -71,12 +79,22 @@
     },
     {
       "id": "ovi_family",
-      "version": "1.2.0",
-      "url": "https://github.com/Slavmarch/releases/releases/download/family-20261031-141324/OVI-Family-Setup-1.2.0.exe",
-      "sha256": "9e6462dbca900c92ef554b8cf8079ab6a467165fa5eec9acfc5d39d2682dfa3b",
-      "size": 4046793,
-      "notes": "[버그 신고]와 언어 고르기가 생겼어요",
+      "version": "1.2.1",
+      "url": "https://github.com/Slavmarch/releases/releases/download/family-20261031-150804/OVI-Family-Setup-1.2.1.exe",
+      "sha256": "2f61c75837997f270ed556ea5d74a9502c00c18f5e061bac1df0998826d61052",
+      "size": 4051882,
+      "notes": "업데이트가 끝나면 쓰던 앱을 다시 켜 주고, 메뉴를 정리했어요",
       "history": [
+        {
+          "version": "1.2.1",
+          "date": "2026-10-31",
+          "summary": "업데이트가 끝나면 쓰던 앱을 다시 켜 주고, 메뉴를 정리했어요",
+          "lines": [
+            "업데이트 전에 켜져 있던 Optic·Glen·Overmind 를 설치가 끝난 뒤 다시 켜요",
+            "버그 신고·기록 모으기·약관·쓰는 부품을 맨 위 [도움] 메뉴로 모았어요",
+            "업데이트 설치가 막히면 설치 기록을 남겨 원인을 찾을 수 있어요"
+          ]
+        },
         {
           "version": "1.2.0",
           "date": "2026-10-31",
