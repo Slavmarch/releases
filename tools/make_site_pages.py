@@ -313,10 +313,12 @@ def app_page(a):
     feats = "".join(f'<div class="feat"><h3>{E(t)}</h3><p>{E(d)}</p></div>' for t, d in (a["feats"] if L == "ko" else en["feats"]))
     others = "".join(f'<a class="chip" style="--app:{o["color"]}" href="../{o["id"]}/"><img class="chip-icon" src="{r}assets/icons/{o["id"]}.png?v={V["icons"]}" alt="" width="20" height="20">{E(o["name"])}</a>'
                      for o in APPS if o["id"] != a["id"])
+    dl = (f'<a class="chip on" style="--app:{a["color"]}" href="{E(DOWNLOAD[a["id"]])}">{T("Windows 용 내려받기", "Download for Windows")}</a>' if DOWNLOAD.get(a["id"])
+          else f'<span class="chip off" title="{T("곧 열려요", "Coming soon")}">{T("내려받기 · 준비 중", "Download · coming soon")}</span>')
     priv = T(PRIVACY.get(a["id"], PRIVACY["ai"]), PRIVACY_EN.get(a["id"], PRIVACY_EN["ai"]))
     more = T(f'자세한 것은 <a href="{r}legal/privacy-ko.html">개인정보 처리방침</a>에 있어요.', f'See the <a href="{r}legal/privacy-en.html">Privacy Policy</a> for details.')
     body = f"""<section class="card"><p class="lead">{E(T(a["intro"], en["intro"]))}</p>
-<div class="chips"><span class="chip off" title="{T("곧 열려요", "Coming soon")}">{T("내려받기 · 준비 중", "Download · coming soon")}</span><span class="chip ghost">Windows 10·11 · {T("시험 중", "in testing")}</span><span class="chip ghost">macOS · {T("준비 중", "coming soon")}</span></div></section>
+<div class="chips">{dl}<span class="chip ghost">Windows 10·11{"" if DOWNLOAD.get(a["id"]) else " · " + T("시험 중", "in testing")}</span><span class="chip ghost">macOS · {T("준비 중", "coming soon")}</span></div></section>
 <section class="card" id="features">{H2("할 수 있는 것", "Features")}<div class="feats">{feats}</div></section>
 <section class="card">{H2("안심하고 쓰도록", "Privacy")}
 <p class="note">{E(priv)} {more}</p></section>
@@ -383,8 +385,20 @@ def notes_page():
               'pick(location.hash.slice(1));')
     return shell("../", "notes", T("변경점", "Release notes") + " · Lagoonworks", T("라군웍스 앱 변경점", "Lagoonworks release notes"), "#a78bfa", "#1a1033", ("", "Release notes"), band, body, script)
 
-# 앱을 공개할 때 앱 ID → 설치 파일 주소. 비어 있으면 '곧 열려요'
+# 내려받기 단추 (2026-10-31): DOWNLOAD_OPEN 을 True 로 하면 family/apps.json 의 설치 파일 주소로 단추가 켜짐 — 새 판을 올리면 저절로 새 주소.
+# False 면 '곧 열려요'
+DOWNLOAD_OPEN = False
 DOWNLOAD = {}
+
+def load_download(out):
+    if not DOWNLOAD_OPEN: return
+    try:
+        with open(os.path.join(out, "family", "apps.json"), encoding="utf-8") as f: feed = json.load(f)
+    except (OSError, ValueError):
+        return
+    for a in APPS:
+        app = next((x for x in feed.get("apps", []) if x.get("id") == FEED_ID[a["id"]]), None)
+        if app and str(app.get("url", "")).startswith("https://"): DOWNLOAD[a["id"]] = app["url"]
 
 def main(out):
     for n in ("site.css", "band.js", "appband.js", "intro.js"):
@@ -393,6 +407,7 @@ def main(out):
     for a in APPS:
         with open(os.path.join(out, "assets", "icons", a["id"] + ".png"), "rb") as f: h.update(f.read())
     V["icons"] = h.hexdigest()[:8]
+    load_download(out)
     arch_path = os.path.join(out, "notes", "archive.json")
     try:
         with open(arch_path, encoding="utf-8") as f: arch = json.load(f)
