@@ -22,9 +22,10 @@ export function start() {
   function place(at) {
     cards.forEach((c, i) => {
       const d = off(i, at), a = Math.abs(d);
-      c.style.transform = `translateX(${d * wide()}px) translateZ(${-a * 150}px) rotateY(${-d * 24}deg)`;
-      c.style.opacity = a > 2.2 ? 0 : String(1 - a * 0.32);
-      c.style.filter = a > 0.5 ? `brightness(${1 - Math.min(a, 2) * 0.22})` : "none";
+      // translateZ·filter 는 카드를 흐린 그림으로 바꿔 그려서 화소가 떨어졌음 (2026-10-31 사용자) → scale 과 어둡게 덮는 막만
+      c.style.transform = `translateX(${d * wide()}px) rotateY(${-d * 18}deg) scale(${1 - Math.min(a, 2) * 0.12})`;
+      c.style.opacity = a > 2.2 ? 0 : String(1 - a * 0.28);
+      c.style.setProperty("--dim", String(Math.min(a, 2) * 0.22));
       c.style.zIndex = String(10 - Math.round(a * 2));
       c.style.pointerEvents = a > 2.2 ? "none" : "";
     });

@@ -176,7 +176,7 @@ var Band = class {
     }
   }
   fit() {
-    const { width, height } = this.root.getBoundingClientRect();
+    const width = this.root.offsetWidth, height = this.root.offsetHeight;  // 돌리거나 줄인 카드에서도 원래 크기로 (getBoundingClientRect 는 줄어든 크기라 흐려졌음)
     if (width === 0 || height === 0) return;
     const dpr = window.devicePixelRatio || 1;
     this.sky.width = Math.round(width * dpr);
