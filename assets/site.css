@@ -274,3 +274,8 @@ html.intro-on .intro { position: fixed; inset: 0; z-index: 100; display: flex; f
   .side-lang a { min-width: 0; line-height: 26px; padding: 0 8px; }
 }
 .note-lang { margin: 0; color: var(--muted); font-size: 13px; line-height: 20px; }
+
+/* 띠 높이는 쪽·언어와 상관없이 같게 (2026-10-31 사용자 — 영어 제목이 두 줄이라 영어 쪽 띠만 컸음) */
+.band { height: 240px; min-height: 0; }
+.band-text { display: flex; flex-direction: column; justify-content: center; align-items: flex-start; height: 100%; }
+@media (max-width: 760px) { .band { height: 312px; } .band-text { justify-content: flex-start; } }
