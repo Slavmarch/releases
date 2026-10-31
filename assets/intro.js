@@ -33,7 +33,20 @@ export function start() {
     cur = ((i % n) + n) % n;
     place(cur);
     cards.forEach((c, k) => c.classList.toggle("on", k === cur));
-    dots.forEach((d, k) => { d.classList.toggle("on", k === cur); d.style.setProperty("--dot", cards[k].dataset.tint); });
+    // 색이 든 막대는 늘 가운데, 나머지 점은 고리 차례대로 양옆에 (2026-10-31 사용자)
+    const W = (d) => (d === 0 ? 22 : 8), GAP = 8;
+    dots.forEach((el, k) => {
+      const d = off(k, cur);
+      let x = -W(0) / 2;
+      if (d > 0) { x = W(0) / 2 + GAP; for (let j = 1; j < d; j++) x += W(j) + GAP; }
+      if (d < 0) { x = -W(0) / 2; for (let j = -1; j >= d; j--) x -= W(j) + GAP; }
+      const jump = el._x !== undefined && Math.abs(x - el._x) > 40;   // 고리 끝에서 반대편으로 넘어가는 점은 미끄러지지 않고 바로
+      if (jump) { el.style.transition = "none"; el.style.transform = `translateX(${x}px)`; el.offsetWidth; el.style.transition = ""; }
+      else el.style.transform = `translateX(${x}px)`;
+      el._x = x;
+      el.classList.toggle("on", k === cur);
+      el.style.setProperty("--dot", cards[k].dataset.tint);
+    });
     bots.forEach((b, k) => b.setVisible(Math.abs(off(k, cur)) <= 1));   // 보이는 셋만 움직임
   }
   const auto = () => { clearInterval(timer); timer = setInterval(() => go(cur + 1), 3500); };
