@@ -186,3 +186,25 @@ html.intro-on .intro { position: fixed; inset: 0; z-index: 100; display: flex; f
 @keyframes intro-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
 @keyframes intro-out { to { opacity: 0; visibility: hidden; } }
 @media (max-width: 760px) { .ring { height: 270px; } .ring-card { width: 200px; margin-left: -100px; } .ring-screen { height: 128px; } }
+
+/* 내려받기 쪽 */
+.dl-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin-top: 4px; }
+@media (min-width: 900px) { .dl-grid { grid-template-columns: repeat(2, 1fr); } .dl-grid.one { grid-template-columns: 1fr; } }
+.dl-card { position: relative; display: flex; flex-direction: column; gap: 4px; padding: 18px; border-radius: 16px;
+  background: radial-gradient(120% 90% at 0% 0%, color-mix(in srgb, var(--app) 22%, transparent), transparent 62%), var(--surface);
+  border: 1px solid color-mix(in srgb, var(--app) 22%, var(--border)); }
+.dl-card.hub { background: radial-gradient(90% 140% at 0% 0%, color-mix(in srgb, var(--app) 30%, transparent), transparent 65%), var(--surface); }
+.dl-card .app-name { margin: 0; font-size: 17px; font-weight: 700; line-height: 24px; }
+.dl-card .app-desc { margin: 0; font-size: 14px; line-height: 21px; }
+.dl-card .app-desc span { display: block; margin-top: 2px; font-size: 12.5px; line-height: 18px; color: var(--muted); }
+.dl-os { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+.dl-os .chip { height: 26px; padding: 0 10px; font-size: 12px; }
+.dl-btn { align-self: flex-start; display: inline-flex; align-items: center; height: 38px; margin-top: 14px; padding: 0 18px; border-radius: 10px;
+  background: var(--app); color: #fff; font-weight: 700; font-size: 14px; text-decoration: none; }
+.dl-btn.off { background: color-mix(in srgb, var(--app) 18%, transparent); color: var(--muted); cursor: default; }
+.head { position: relative; }
+.head-dl { position: absolute; top: 4px; right: 4px; display: inline-flex; align-items: center; gap: 8px; height: 38px; padding: 0 16px; border-radius: 10px;
+  background: var(--accent); color: var(--on-accent); font: 700 14px/38px var(--font-sans); text-decoration: none;
+  box-shadow: 0 8px 22px -10px color-mix(in srgb, var(--accent) 80%, transparent); transition: background .15s ease, transform .15s ease; }
+.head-dl:hover { background: color-mix(in srgb, var(--accent) 86%, #fff); transform: translateY(-1px); }
+.head-dl svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
