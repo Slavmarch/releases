@@ -293,3 +293,22 @@ html.intro-on .intro { position: fixed; inset: 0; z-index: 100; display: flex; f
 .ad-desc { color: var(--muted); font-size: 13px; line-height: 20px; }
 .ad-go { flex: none; color: var(--muted); font-size: 18px; }
 @media (prefers-reduced-motion: reduce) { .ad-row { transition: none; } }
+/* 넓은 화면: 창 오른쪽 빈자리 세로 배너 (2026-11-01 현우 '옆의 공간에') — 그때는 아래 칸을 숨김 */
+.ad-rail { display: none; }
+@media (min-width: 1700px) {
+  .ad-card { display: none; }
+  .ad-rail { display: flex; flex-direction: column; gap: 10px; position: fixed; top: 140px; width: 200px;
+    left: calc(50% + 620px + (50vw - 620px - 200px) / 2); }
+}
+.rail-ad { position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 6px; padding: 18px 16px 16px; border-radius: 18px;
+  background: radial-gradient(120% 70% at 0% 0%, color-mix(in srgb, var(--app) 22%, transparent), transparent 70%), var(--panel);
+  border: 1px solid color-mix(in srgb, var(--app) 22%, var(--border)); color: var(--text); text-decoration: none;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45); transition: border-color .15s ease, transform .2s ease; }
+.rail-ad:hover { transform: translateY(-2px); border-color: color-mix(in srgb, var(--app) 55%, var(--border)); }
+.rail-ad:focus-visible { outline: 2px solid var(--app); outline-offset: 2px; }
+.rail-ad .ad-tag { position: absolute; top: 12px; right: 12px; }
+.rail-ad .ad-icon { width: 48px; height: 48px; border-radius: 12px; margin-bottom: 4px; }
+.rail-ad .ad-name { font-size: 16px; font-weight: 700; line-height: 22px; }
+.rail-go { margin-top: 6px; color: var(--app); font-size: 13px; font-weight: 700; }
+.rail-note { margin: 0; padding: 0 4px; color: var(--muted); font-size: 11.5px; line-height: 17px; }
+@media (prefers-reduced-motion: reduce) { .rail-ad { transition: none; } .rail-ad:hover { transform: none; } }

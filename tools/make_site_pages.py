@@ -145,19 +145,31 @@ PRIVACY_EN = {
 # 고칠 것: id(영문, 바꾸지 않음) · name · url(https 만) · ko·en(소개 한두 줄) · color(대표색, 없으면 회색)
 ADS = []
 
-def ads_card():
-    rows = []
+def _ad_items():
     for ad in ADS:
         if not str(ad.get("url", "")).startswith("https://"): continue
-        icon_path = os.path.join(OUT, "assets", "ads", ad["id"] + ".png")
-        icon = (f'<img class="ad-icon" src="{R("")}assets/ads/{ad["id"]}.png" alt="" width="44" height="44">' if os.path.exists(icon_path)
+        icon = (f'<img class="ad-icon" src="{R("")}assets/ads/{ad["id"]}.png" alt="" width="44" height="44">' if os.path.exists(os.path.join(OUT, "assets", "ads", ad["id"] + ".png"))
                 else f'<span class="ad-icon ad-letter" aria-hidden="true">{E(ad["name"][:1])}</span>')
-        rows.append(f'<a class="ad-row" style="--app:{ad.get("color", "#9399a1")}" href="{E(ad["url"])}" target="_blank" rel="sponsored noopener noreferrer">{icon}'
-                    f'<span class="ad-text"><span class="ad-name">{E(ad["name"])}<span class="ad-tag">{T("광고", "Ad")}</span></span>'
-                    f'<span class="ad-desc">{E(T(ad["ko"], ad["en"]))}</span></span><span class="ad-go" aria-hidden="true">↗</span></a>')
+        yield ad, icon
+
+AD_NOTE = lambda: T("라군웍스가 만든 앱이 아니에요. 누르면 그 앱의 사이트로 가요.", "Not made by Lagoonworks. Opens the app's own site.")
+
+def ads_card():
+    """좁은 화면: 첫 화면 앱 카드 아래 칸 (넓은 화면에선 숨기고 오른쪽 세로 배너 ads_rail 이 대신)."""
+    rows = [f'<a class="ad-row" style="--app:{ad.get("color", "#9399a1")}" href="{E(ad["url"])}" target="_blank" rel="sponsored noopener noreferrer">{icon}'
+            f'<span class="ad-text"><span class="ad-name">{E(ad["name"])}<span class="ad-tag">{T("광고", "Ad")}</span></span>'
+            f'<span class="ad-desc">{E(T(ad["ko"], ad["en"]))}</span></span><span class="ad-go" aria-hidden="true">↗</span></a>' for ad, icon in _ad_items()]
     if not rows: return ""
     return (f'<section class="card ad-card" aria-label="{T("광고", "Advertisement")}"><h2>{T("이런 앱도 있어요", "You might also like")}</h2>{"".join(rows)}'
-            f'<p class="note">{T("라군웍스가 만든 앱이 아니에요. 누르면 그 앱의 사이트로 가요.", "These apps are not made by Lagoonworks. Clicking opens their own site.")}</p></section>')
+            f'<p class="note">{AD_NOTE()}</p></section>')
+
+def ads_rail():
+    """넓은 화면(1700 이상): 창 오른쪽 빈자리에 세로 배너 (2026-11-01 현우 '옆의 공간에'). 모든 쪽에."""
+    cards = [f'<a class="rail-ad" style="--app:{ad.get("color", "#9399a1")}" href="{E(ad["url"])}" target="_blank" rel="sponsored noopener noreferrer">'
+             f'<span class="ad-tag">{T("광고", "Ad")}</span>{icon}<span class="ad-name">{E(ad["name"])}</span>'
+             f'<span class="ad-desc">{E(T(ad["ko"], ad["en"]))}</span><span class="rail-go">{T("보러 가기", "Visit")} <span aria-hidden="true">↗</span></span></a>' for ad, icon in _ad_items()]
+    if not cards: return ""
+    return f'<aside class="ad-rail" aria-label="{T("광고", "Advertisement")}">{"".join(cards)}<p class="rail-note">{AD_NOTE()}</p></aside>'
 
 def path_of(current):
     """이 쪽의 언어 없는 자리 (한국어 = 맨 위, 영어 = en/ 아래)."""
@@ -237,6 +249,7 @@ def shell(base, current, title, desc, tint, on, head, band_html, body, script):
 {footer(base)}
 </div></main>
 </div>
+{ads_rail()}
 <script type="module">
 {script}
 const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
