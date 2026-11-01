@@ -141,9 +141,13 @@ PRIVACY_EN = {
 }
 
 # 다른 사람이 만든 앱 소개 칸 (2026-11-01 현우 '동기가 만든 앱도 광고하고 싶다'): 첫 화면 앱 카드 아래에 '광고' 표시를 달고 보여 줌.
-# 비어 있으면 칸이 안 생김. 광고 회사 스크립트·추적 없음 — 그림은 assets/ads/<id>.png 로 사이트에 직접 넣음(없으면 첫 글자).
+# 비어 있으면 칸이 안 생김. 광고 회사 스크립트·추적 없음 — 그림은 assets/picks/<id>.png 로 사이트에 직접 넣음(없으면 첫 글자).
 # 고칠 것: id(영문, 바꾸지 않음) · name · url(https 만) · ko·en(소개 한두 줄) · color(대표색, 없으면 회색)
-# 세로 배너 위 큰 그림 = assets/ads/<id>_cover.jpg (+ _cover2.jpg 면 번갈아) (그 사이트 대표 그림을 잘라 넣음, 2026-11-01 현우 — 없으면 대표색 바탕)
+# 세로 배너 위 큰 그림 = assets/picks/<id>_cover.jpg (+ _cover2.jpg 면 번갈아) (그 사이트 대표 그림을 잘라 넣음, 2026-11-01 현우 — 없으면 대표색 바탕)
+# paid=True(돈을 받고 싣는 광고)면 표시는 '광고'·rel sponsored — 법(표시광고법·추천보증 심사지침)상 꼭. 돈 안 받는 소개는 '추천' (2026-11-01 현우 'DUK 는 아직 돈 받는 거래 아님').
+# 안쪽 이름표·그림 폴더는 ad- 말고 pick- (광고 차단 프로그램이 ad- 이름을 보고 지웠음). 보이는 표시는 늘 그대로.
+LABEL = lambda ad: T("광고", "Ad") if ad.get("paid") else T("추천", "Pick")
+REL = lambda ad: "sponsored noopener noreferrer" if ad.get("paid") else "noopener noreferrer"
 ADS = [
   dict(id="duk", name="DUK", url="https://duk-hello.pages.dev/", color="#e07b5e",
        ko="같이 켜 두는 작업실. 멀리 있어도 같은 층 옆자리처럼 함께 일해요.",
@@ -153,35 +157,35 @@ ADS = [
 def _ad_items(base=""):
     for ad in ADS:
         if not str(ad.get("url", "")).startswith("https://"): continue
-        icon = (f'<img class="ad-icon" src="{R(base)}assets/ads/{ad["id"]}.png" alt="" width="44" height="44">' if os.path.exists(os.path.join(OUT, "assets", "ads", ad["id"] + ".png"))
-                else f'<span class="ad-icon ad-letter" aria-hidden="true">{E(ad["name"][:1])}</span>')
+        icon = (f'<img class="pick-icon" src="{R(base)}assets/picks/{ad["id"]}.png" alt="" width="44" height="44">' if os.path.exists(os.path.join(OUT, "assets", "picks", ad["id"] + ".png"))
+                else f'<span class="pick-icon pick-letter" aria-hidden="true">{E(ad["name"][:1])}</span>')
         yield ad, icon
 
 AD_NOTE = lambda: T("라군웍스가 만든 앱이 아니에요. 누르면 그 앱의 사이트로 가요.", "Not made by Lagoonworks. Opens the app's own site.")
 
 def ads_card():
     """좁은 화면: 첫 화면 앱 카드 아래 칸 (넓은 화면에선 숨기고 오른쪽 세로 배너 ads_rail 이 대신)."""
-    rows = [f'<a class="ad-row" style="--app:{ad.get("color", "#9399a1")}" href="{E(ad["url"])}" target="_blank" rel="sponsored noopener noreferrer">{icon}'
-            f'<span class="ad-text"><span class="ad-name">{E(ad["name"])}<span class="ad-tag">{T("광고", "Ad")}</span></span>'
-            f'<span class="ad-desc">{E(T(ad["ko"], ad["en"]))}</span></span><span class="ad-go" aria-hidden="true">↗</span></a>' for ad, icon in _ad_items()]
+    rows = [f'<a class="pick-row" style="--app:{ad.get("color", "#9399a1")}" href="{E(ad["url"])}" target="_blank" rel="{REL(ad)}">{icon}'
+            f'<span class="pick-text"><span class="pick-name">{E(ad["name"])}<span class="pick-tag">{LABEL(ad)}</span></span>'
+            f'<span class="pick-desc">{E(T(ad["ko"], ad["en"]))}</span></span><span class="pick-go" aria-hidden="true">↗</span></a>' for ad, icon in _ad_items()]
     if not rows: return ""
-    return (f'<section class="card ad-card" aria-label="{T("광고", "Advertisement")}"><h2>{T("이런 앱도 있어요", "You might also like")}</h2>{"".join(rows)}'
+    return (f'<section class="card pick-card" aria-label="{T("다른 앱 소개", "Other apps")}"><h2>{T("이런 앱도 있어요", "You might also like")}</h2>{"".join(rows)}'
             f'<p class="note">{AD_NOTE()}</p></section>')
 
 def ads_rail(base):
     """넓은 화면(1700 이상): 창 오른쪽 빈자리에 길쭉한 세로 배너 (2026-11-01 현우 '옆의 공간에', '좀 길게, 대표 이미지 잘라서'). 모든 쪽에."""
     cards = []
     for ad, icon in _ad_items(base):
-        covers = [n for n in (ad["id"] + "_cover.jpg", ad["id"] + "_cover2.jpg") if os.path.exists(os.path.join(OUT, "assets", "ads", n))]
+        covers = [n for n in (ad["id"] + "_cover.jpg", ad["id"] + "_cover2.jpg") if os.path.exists(os.path.join(OUT, "assets", "picks", n))]
         # 그림이 둘이면 천천히 번갈아 (2026-11-01 현우 '이 이미지도 같이') — 움직임 줄이기 설정이면 첫 그림만
         art = (f'<span class="rail-art{" two" if len(covers) > 1 else ""}">' + "".join(
-                   f'<img class="rail-cover" src="{R(base)}assets/ads/{n}" alt="" width="220" loading="lazy">' for n in covers) + '</span>'
+                   f'<img class="rail-cover" src="{R(base)}assets/picks/{n}" alt="" width="220" loading="lazy">' for n in covers) + '</span>'
                if covers else '<span class="rail-cover rail-blank" aria-hidden="true"></span>')
-        cards.append(f'<a class="rail-ad" style="--app:{ad.get("color", "#9399a1")}" href="{E(ad["url"])}" target="_blank" rel="sponsored noopener noreferrer">'
-                     f'{art}<span class="ad-tag">{T("광고", "Ad")}</span><span class="rail-body">{icon}<span class="ad-name">{E(ad["name"])}</span>'
-                     f'<span class="ad-desc">{E(T(ad["ko"], ad["en"]))}</span><span class="rail-go">{T("보러 가기", "Visit")} <span aria-hidden="true">↗</span></span></span></a>')
+        cards.append(f'<a class="rail-pick" style="--app:{ad.get("color", "#9399a1")}" href="{E(ad["url"])}" target="_blank" rel="{REL(ad)}">'
+                     f'{art}<span class="pick-tag">{LABEL(ad)}</span><span class="rail-body">{icon}<span class="pick-name">{E(ad["name"])}</span>'
+                     f'<span class="pick-desc">{E(T(ad["ko"], ad["en"]))}</span><span class="rail-go">{T("보러 가기", "Visit")} <span aria-hidden="true">↗</span></span></span></a>')
     if not cards: return ""
-    return f'<aside class="ad-rail" aria-label="{T("광고", "Advertisement")}">{"".join(cards)}<p class="rail-note">{AD_NOTE()}</p></aside>'
+    return f'<aside class="pick-rail" aria-label="{T("다른 앱 소개", "Other apps")}">{"".join(cards)}<p class="rail-note">{AD_NOTE()}</p></aside>'
 
 def path_of(current):
     """이 쪽의 언어 없는 자리 (한국어 = 맨 위, 영어 = en/ 아래)."""

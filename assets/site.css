@@ -280,31 +280,31 @@ html.intro-on .intro { position: fixed; inset: 0; z-index: 100; display: flex; f
 .band-text { display: flex; flex-direction: column; justify-content: center; align-items: flex-start; height: 100%; }
 @media (max-width: 760px) { .band { height: 312px; } .band-text { justify-content: flex-start; } }
 /* 다른 사람이 만든 앱 소개 칸 (2026-11-01) — 우리 앱 카드보다 조용하게, '광고' 표시는 늘 보이게 */
-.ad-card { display: flex; flex-direction: column; gap: 8px; }
-.ad-row { display: flex; align-items: center; gap: 14px; padding: 12px 14px; border-radius: 14px; background: var(--surface); color: var(--text); text-decoration: none;
+.pick-card { display: flex; flex-direction: column; gap: 8px; }
+.pick-row { display: flex; align-items: center; gap: 14px; padding: 12px 14px; border-radius: 14px; background: var(--surface); color: var(--text); text-decoration: none;
   border: 1px solid var(--border); transition: border-color .15s ease, background .15s ease; }
-.ad-row:hover { background: var(--hover); border-color: color-mix(in srgb, var(--app) 45%, var(--border)); }
-.ad-row:focus-visible { outline: 2px solid var(--app); outline-offset: 2px; }
-.ad-icon { flex: none; width: 44px; height: 44px; border-radius: 11px; }
-.ad-letter { display: grid; place-items: center; background: color-mix(in srgb, var(--app) 30%, var(--panel)); color: var(--text); font: 700 18px/1 var(--font-sans); }
-.ad-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; flex: 1; }
-.ad-name { display: flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 700; line-height: 22px; }
-.ad-tag { padding: 0 6px; border-radius: 5px; border: 1px solid var(--border); color: var(--muted); font-size: 11px; font-weight: 600; line-height: 17px; }
-.ad-desc { color: var(--muted); font-size: 13px; line-height: 20px; }
-.ad-go { flex: none; color: var(--muted); font-size: 18px; }
-@media (prefers-reduced-motion: reduce) { .ad-row { transition: none; } }
+.pick-row:hover { background: var(--hover); border-color: color-mix(in srgb, var(--app) 45%, var(--border)); }
+.pick-row:focus-visible { outline: 2px solid var(--app); outline-offset: 2px; }
+.pick-icon { flex: none; width: 44px; height: 44px; border-radius: 11px; }
+.pick-letter { display: grid; place-items: center; background: color-mix(in srgb, var(--app) 30%, var(--panel)); color: var(--text); font: 700 18px/1 var(--font-sans); }
+.pick-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; flex: 1; }
+.pick-name { display: flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 700; line-height: 22px; }
+.pick-tag { padding: 0 6px; border-radius: 5px; border: 1px solid var(--border); color: var(--muted); font-size: 11px; font-weight: 600; line-height: 17px; }
+.pick-desc { color: var(--muted); font-size: 13px; line-height: 20px; }
+.pick-go { flex: none; color: var(--muted); font-size: 18px; }
+@media (prefers-reduced-motion: reduce) { .pick-row { transition: none; } }
 /* 넓은 화면: 창 오른쪽 빈자리 길쭉한 세로 배너 (2026-11-01 현우 '옆의 공간에', '좀 길게, 대표 이미지 잘라서') — 그때는 아래 칸을 숨김 */
-.ad-rail { display: none; }
+.pick-rail { display: none; }
 @media (min-width: 1700px) {
-  .ad-card { display: none; }
-  .ad-rail { display: flex; flex-direction: column; gap: 10px; position: absolute; top: 372px; width: 220px;
+  .pick-card { display: none; }
+  .pick-rail { display: flex; flex-direction: column; gap: 10px; position: absolute; top: 372px; width: 220px;
     left: calc(50% + 620px + (50vw - 620px - 220px) / 2); }
 }
-.rail-ad { position: relative; display: flex; flex-direction: column; overflow: hidden; border-radius: 20px; min-height: 560px;
+.rail-pick { position: relative; display: flex; flex-direction: column; overflow: hidden; border-radius: 20px; min-height: 560px;
   background: var(--panel); border: 1px solid color-mix(in srgb, var(--app) 26%, var(--border)); color: var(--text); text-decoration: none;
   box-shadow: 0 24px 70px rgba(0, 0, 0, 0.5); transition: border-color .15s ease, transform .2s ease; }
-.rail-ad:hover { transform: translateY(-2px); border-color: color-mix(in srgb, var(--app) 60%, var(--border)); }
-.rail-ad:focus-visible { outline: 2px solid var(--app); outline-offset: 2px; }
+.rail-pick:hover { transform: translateY(-2px); border-color: color-mix(in srgb, var(--app) 60%, var(--border)); }
+.rail-pick:focus-visible { outline: 2px solid var(--app); outline-offset: 2px; }
 .rail-cover { display: block; width: 100%; height: auto; max-height: 420px; object-fit: cover; }
 .rail-blank { height: 300px; }
 .rail-art { position: relative; display: block; }
@@ -312,13 +312,13 @@ html.intro-on .intro { position: fixed; inset: 0; z-index: 100; display: flex; f
 @keyframes rail-swap { 0%, 40% { opacity: 0; } 50%, 90% { opacity: 1; } 100% { opacity: 0; } }
 @media (prefers-reduced-motion: reduce) { .rail-art.two .rail-cover + .rail-cover { animation: none; } }
 .rail-blank { background: radial-gradient(120% 90% at 20% 10%, color-mix(in srgb, var(--app) 70%, #fff 10%), color-mix(in srgb, var(--app) 35%, #0b0b10) 75%); }
-.rail-ad .ad-tag { position: absolute; top: 12px; right: 12px; background: rgba(16, 17, 21, 0.72); color: #e6e8eb; border-color: rgba(255,255,255,0.18); }
+.rail-pick .pick-tag { position: absolute; top: 12px; right: 12px; background: rgba(16, 17, 21, 0.72); color: #e6e8eb; border-color: rgba(255,255,255,0.18); }
 .rail-body { position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 6px; flex: 1; padding: 0 18px 18px;
   background: linear-gradient(180deg, color-mix(in srgb, var(--app) 14%, var(--panel)), var(--panel) 60%); }
-.rail-ad .ad-icon { width: 52px; height: 52px; border-radius: 14px; margin-top: -26px; margin-bottom: 4px; box-shadow: 0 0 0 3px var(--panel); }
-.rail-ad .ad-name { font-size: 18px; font-weight: 700; line-height: 24px; }
-.rail-ad .ad-desc { font-size: 13.5px; line-height: 21px; }
+.rail-pick .pick-icon { width: 52px; height: 52px; border-radius: 14px; margin-top: -26px; margin-bottom: 4px; box-shadow: 0 0 0 3px var(--panel); }
+.rail-pick .pick-name { font-size: 18px; font-weight: 700; line-height: 24px; }
+.rail-pick .pick-desc { font-size: 13.5px; line-height: 21px; }
 .rail-go { margin-top: auto; padding-top: 12px; color: var(--app); font-size: 13.5px; font-weight: 700; }
-.rail-art + .ad-tag + .rail-body .ad-icon { margin-top: 14px; }   /* 그림이 있으면 아이콘이 그림을 안 가림 */
+.rail-art + .pick-tag + .rail-body .pick-icon { margin-top: 14px; }   /* 그림이 있으면 아이콘이 그림을 안 가림 */
 .rail-note { margin: 0; padding: 0 4px; color: var(--muted); font-size: 11.5px; line-height: 17px; }
-@media (prefers-reduced-motion: reduce) { .rail-ad { transition: none; } .rail-ad:hover { transform: none; } }
+@media (prefers-reduced-motion: reduce) { .rail-pick { transition: none; } .rail-pick:hover { transform: none; } }
