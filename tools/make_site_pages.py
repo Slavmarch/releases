@@ -244,6 +244,10 @@ def intro():
             f'<button class="intro-enter" id="intro-enter" type="button">{T("들어가기", "Enter")}</button></div>'
             f'<script type="module">import {{ start }} from "{R("./")}assets/intro.js?v={V["intro.js"]}"; start();</script>')
 
+# 글자로 쓸 때 어두운 바탕에서 대비가 모자란 대표색은 밝힌 색으로 (2026-11-01 UX 점검 — Parser 빨강 3.2:1 → 5.8:1, 가족 규칙 app-parser-text)
+TEXT_TINT = {"#d6262f": "#ff6b72"}
+
+
 def shell(base, current, title, desc, tint, on, head, band_html, body, script):
     return f'''<!doctype html>
 <html lang="{L}"><head>
@@ -255,7 +259,7 @@ def shell(base, current, title, desc, tint, on, head, band_html, body, script):
 <link rel="icon" href="/favicon.png" type="image/png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="alternate" hreflang="ko" href="https://lagoonworks.app/{path_of(current)}"><link rel="alternate" hreflang="en" href="https://lagoonworks.app/en/{path_of(current)}">
 <link rel="stylesheet" href="{R(base)}assets/site.css?v={V["site.css"]}">{INTRO_HEAD if current == "home" else ""}
-</head><body style="--accent:{tint};--on-accent:{on}">{intro() if current == "home" else ""}
+</head><body style="--accent:{tint};--accent-text:{TEXT_TINT.get(tint.lower(), tint)};--on-accent:{on}">{intro() if current == "home" else ""}
 <div class="window">
 {side(base, current)}
 <main class="scroll"><div class="page">
