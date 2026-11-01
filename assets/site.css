@@ -297,7 +297,7 @@ html.intro-on .intro { position: fixed; inset: 0; z-index: 100; display: flex; f
 .ad-rail { display: none; }
 @media (min-width: 1700px) {
   .ad-card { display: none; }
-  .ad-rail { display: flex; flex-direction: column; gap: 10px; position: fixed; top: 117px; width: 220px;
+  .ad-rail { display: flex; flex-direction: column; gap: 10px; position: fixed; top: clamp(28px, calc(100vh - 620px), 372px); width: 220px;
     left: calc(50% + 620px + (50vw - 620px - 220px) / 2); }
 }
 .rail-ad { position: relative; display: flex; flex-direction: column; overflow: hidden; border-radius: 20px; min-height: 560px;
