@@ -305,7 +305,11 @@ html.intro-on .intro { position: fixed; inset: 0; z-index: 100; display: flex; f
   box-shadow: 0 24px 70px rgba(0, 0, 0, 0.5); transition: border-color .15s ease, transform .2s ease; }
 .rail-ad:hover { transform: translateY(-2px); border-color: color-mix(in srgb, var(--app) 60%, var(--border)); }
 .rail-ad:focus-visible { outline: 2px solid var(--app); outline-offset: 2px; }
-.rail-cover { display: block; width: 100%; height: 300px; object-fit: cover; }
+.rail-cover { display: block; width: 100%; height: 400px; object-fit: cover; }
+.rail-art { position: relative; display: block; height: 400px; }
+.rail-art.two .rail-cover + .rail-cover { position: absolute; inset: 0; opacity: 0; animation: rail-swap 14s ease-in-out infinite; }
+@keyframes rail-swap { 0%, 40% { opacity: 0; } 50%, 90% { opacity: 1; } 100% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .rail-art.two .rail-cover + .rail-cover { animation: none; } }
 .rail-blank { background: radial-gradient(120% 90% at 20% 10%, color-mix(in srgb, var(--app) 70%, #fff 10%), color-mix(in srgb, var(--app) 35%, #0b0b10) 75%); }
 .rail-ad .ad-tag { position: absolute; top: 12px; right: 12px; background: rgba(16, 17, 21, 0.72); color: #e6e8eb; border-color: rgba(255,255,255,0.18); }
 .rail-body { position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 6px; flex: 1; padding: 0 18px 18px;
