@@ -1,0 +1,18 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="robots" content="noindex"><title>배너 시험</title>
+<style>body{margin:0;font:15px/1.6 sans-serif;background:#101115;color:#e6e8eb}pre{margin:12px;padding:12px;background:#202226;border-radius:12px;white-space:pre-wrap}iframe{position:fixed;inset:0;width:100%;height:100%;border:0;opacity:.0;pointer-events:none}</style></head>
+<body><pre id="out">재는 중이에요…</pre>
+<script>
+// 2026-11-01 광고 배너가 반짝하고 사라지는 까닭 찾기 (시험이 끝나면 지움)
+const out=document.getElementById("out"), log=[];
+const f=document.createElement("iframe"); f.src="download/"; document.body.appendChild(f);
+const t0=performance.now();
+function snap(){
+  const d=f.contentDocument, w=f.contentWindow; let r=null;
+  try{ const e=d&&d.querySelector(".ad-rail"); if(e){const b=e.getBoundingClientRect(); r=w.getComputedStyle(e).display+" "+Math.round(b.left)+","+Math.round(b.top)+" "+Math.round(b.width)+"x"+Math.round(b.height);} }catch(e){r="err "+e}
+  log.push(Math.round(performance.now()-t0)+"ms  창 "+(w?w.innerWidth:"?")+"x"+(w?w.innerHeight:"?")+"  배너 "+r);
+}
+const id=setInterval(snap,100);
+setTimeout(()=>{clearInterval(id);
+  out.textContent="이 글을 캡처해서 보내 주세요\n\n화면 "+screen.width+"x"+screen.height+"  배율 "+devicePixelRatio+"\n창 "+innerWidth+"x"+innerHeight+"  (1700 이상 = 오른쪽 배너: "+matchMedia("(min-width: 1700px)").matches+")\n"+navigator.userAgent+"\n\n"+log.filter((x,i)=>i%3==0||i==log.length-1).join("\n");
+},3000);
+</script></body></html>
