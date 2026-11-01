@@ -150,10 +150,10 @@ ADS = [
        en="A shared workroom you keep open. Work side by side, even from far away."),
 ]
 
-def _ad_items():
+def _ad_items(base=""):
     for ad in ADS:
         if not str(ad.get("url", "")).startswith("https://"): continue
-        icon = (f'<img class="ad-icon" src="{R("")}assets/ads/{ad["id"]}.png" alt="" width="44" height="44">' if os.path.exists(os.path.join(OUT, "assets", "ads", ad["id"] + ".png"))
+        icon = (f'<img class="ad-icon" src="{R(base)}assets/ads/{ad["id"]}.png" alt="" width="44" height="44">' if os.path.exists(os.path.join(OUT, "assets", "ads", ad["id"] + ".png"))
                 else f'<span class="ad-icon ad-letter" aria-hidden="true">{E(ad["name"][:1])}</span>')
         yield ad, icon
 
@@ -168,14 +168,14 @@ def ads_card():
     return (f'<section class="card ad-card" aria-label="{T("광고", "Advertisement")}"><h2>{T("이런 앱도 있어요", "You might also like")}</h2>{"".join(rows)}'
             f'<p class="note">{AD_NOTE()}</p></section>')
 
-def ads_rail():
+def ads_rail(base):
     """넓은 화면(1700 이상): 창 오른쪽 빈자리에 길쭉한 세로 배너 (2026-11-01 현우 '옆의 공간에', '좀 길게, 대표 이미지 잘라서'). 모든 쪽에."""
     cards = []
-    for ad, icon in _ad_items():
+    for ad, icon in _ad_items(base):
         covers = [n for n in (ad["id"] + "_cover.jpg", ad["id"] + "_cover2.jpg") if os.path.exists(os.path.join(OUT, "assets", "ads", n))]
         # 그림이 둘이면 천천히 번갈아 (2026-11-01 현우 '이 이미지도 같이') — 움직임 줄이기 설정이면 첫 그림만
         art = (f'<span class="rail-art{" two" if len(covers) > 1 else ""}">' + "".join(
-                   f'<img class="rail-cover" src="{R("")}assets/ads/{n}" alt="" width="220" loading="lazy">' for n in covers) + '</span>'
+                   f'<img class="rail-cover" src="{R(base)}assets/ads/{n}" alt="" width="220" loading="lazy">' for n in covers) + '</span>'
                if covers else '<span class="rail-cover rail-blank" aria-hidden="true"></span>')
         cards.append(f'<a class="rail-ad" style="--app:{ad.get("color", "#9399a1")}" href="{E(ad["url"])}" target="_blank" rel="sponsored noopener noreferrer">'
                      f'{art}<span class="ad-tag">{T("광고", "Ad")}</span><span class="rail-body">{icon}<span class="ad-name">{E(ad["name"])}</span>'
@@ -261,7 +261,7 @@ def shell(base, current, title, desc, tint, on, head, band_html, body, script):
 {footer(base)}
 </div></main>
 </div>
-{ads_rail()}
+{ads_rail(base)}
 <script type="module">
 {script}
 const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
