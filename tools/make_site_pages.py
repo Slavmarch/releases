@@ -150,8 +150,8 @@ LABEL = lambda ad: T("광고", "Ad") if ad.get("paid") else T("추천", "Pick")
 REL = lambda ad: "sponsored noopener noreferrer" if ad.get("paid") else "noopener noreferrer"
 ADS = [
   dict(id="duk", name="DUK", url="https://duk-hello.pages.dev/", color="#e07b5e",
-       ko="같이 켜 두는 작업실. 멀리 있어도 같은 층 옆자리처럼 함께 일해요.",
-       en="A shared workroom you keep open. Work side by side, even from far away."),
+       ko="멀리 있어도, 같은 층 옆자리.",
+       en="Far apart, still at the next desk."),
 ]
 
 def _ad_items(base=""):
