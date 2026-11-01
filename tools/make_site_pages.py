@@ -175,7 +175,7 @@ def ads_rail():
         covers = [n for n in (ad["id"] + "_cover.jpg", ad["id"] + "_cover2.jpg") if os.path.exists(os.path.join(OUT, "assets", "ads", n))]
         # 그림이 둘이면 천천히 번갈아 (2026-11-01 현우 '이 이미지도 같이') — 움직임 줄이기 설정이면 첫 그림만
         art = (f'<span class="rail-art{" two" if len(covers) > 1 else ""}">' + "".join(
-                   f'<img class="rail-cover" src="{R("")}assets/ads/{n}" alt="" width="220" height="400" loading="lazy">' for n in covers) + '</span>'
+                   f'<img class="rail-cover" src="{R("")}assets/ads/{n}" alt="" width="220" loading="lazy">' for n in covers) + '</span>'
                if covers else '<span class="rail-cover rail-blank" aria-hidden="true"></span>')
         cards.append(f'<a class="rail-ad" style="--app:{ad.get("color", "#9399a1")}" href="{E(ad["url"])}" target="_blank" rel="sponsored noopener noreferrer">'
                      f'{art}<span class="ad-tag">{T("광고", "Ad")}</span><span class="rail-body">{icon}<span class="ad-name">{E(ad["name"])}</span>'
