@@ -143,6 +143,7 @@ PRIVACY_EN = {
 # 다른 사람이 만든 앱 소개 칸 (2026-11-01 현우 '동기가 만든 앱도 광고하고 싶다'): 첫 화면 앱 카드 아래에 '광고' 표시를 달고 보여 줌.
 # 비어 있으면 칸이 안 생김. 광고 회사 스크립트·추적 없음 — 그림은 assets/ads/<id>.png 로 사이트에 직접 넣음(없으면 첫 글자).
 # 고칠 것: id(영문, 바꾸지 않음) · name · url(https 만) · ko·en(소개 한두 줄) · color(대표색, 없으면 회색)
+# 세로 배너 위 큰 그림 = assets/ads/<id>_cover.jpg (그 사이트 대표 그림을 잘라 넣음, 2026-11-01 현우 — 없으면 대표색 바탕)
 ADS = []
 
 def _ad_items():
@@ -164,10 +165,15 @@ def ads_card():
             f'<p class="note">{AD_NOTE()}</p></section>')
 
 def ads_rail():
-    """넓은 화면(1700 이상): 창 오른쪽 빈자리에 세로 배너 (2026-11-01 현우 '옆의 공간에'). 모든 쪽에."""
-    cards = [f'<a class="rail-ad" style="--app:{ad.get("color", "#9399a1")}" href="{E(ad["url"])}" target="_blank" rel="sponsored noopener noreferrer">'
-             f'<span class="ad-tag">{T("광고", "Ad")}</span>{icon}<span class="ad-name">{E(ad["name"])}</span>'
-             f'<span class="ad-desc">{E(T(ad["ko"], ad["en"]))}</span><span class="rail-go">{T("보러 가기", "Visit")} <span aria-hidden="true">↗</span></span></a>' for ad, icon in _ad_items()]
+    """넓은 화면(1700 이상): 창 오른쪽 빈자리에 길쭉한 세로 배너 (2026-11-01 현우 '옆의 공간에', '좀 길게, 대표 이미지 잘라서'). 모든 쪽에."""
+    cards = []
+    for ad, icon in _ad_items():
+        cover = os.path.exists(os.path.join(OUT, "assets", "ads", ad["id"] + "_cover.jpg"))
+        art = (f'<img class="rail-cover" src="{R("")}assets/ads/{ad["id"]}_cover.jpg" alt="" width="220" height="300" loading="lazy">' if cover
+               else '<span class="rail-cover rail-blank" aria-hidden="true"></span>')
+        cards.append(f'<a class="rail-ad" style="--app:{ad.get("color", "#9399a1")}" href="{E(ad["url"])}" target="_blank" rel="sponsored noopener noreferrer">'
+                     f'{art}<span class="ad-tag">{T("광고", "Ad")}</span><span class="rail-body">{icon}<span class="ad-name">{E(ad["name"])}</span>'
+                     f'<span class="ad-desc">{E(T(ad["ko"], ad["en"]))}</span><span class="rail-go">{T("보러 가기", "Visit")} <span aria-hidden="true">↗</span></span></span></a>')
     if not cards: return ""
     return f'<aside class="ad-rail" aria-label="{T("광고", "Advertisement")}">{"".join(cards)}<p class="rail-note">{AD_NOTE()}</p></aside>'
 
