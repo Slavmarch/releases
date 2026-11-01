@@ -144,7 +144,11 @@ PRIVACY_EN = {
 # 비어 있으면 칸이 안 생김. 광고 회사 스크립트·추적 없음 — 그림은 assets/ads/<id>.png 로 사이트에 직접 넣음(없으면 첫 글자).
 # 고칠 것: id(영문, 바꾸지 않음) · name · url(https 만) · ko·en(소개 한두 줄) · color(대표색, 없으면 회색)
 # 세로 배너 위 큰 그림 = assets/ads/<id>_cover.jpg (그 사이트 대표 그림을 잘라 넣음, 2026-11-01 현우 — 없으면 대표색 바탕)
-ADS = []
+ADS = [
+  dict(id="duk", name="DUK", url="https://duk-hello.pages.dev/", color="#e07b5e",
+       ko="같이 켜 두는 작업실. 멀리 있어도 같은 층 옆자리처럼 함께 일해요.",
+       en="A shared workroom you keep open. Work side by side, even from far away."),
+]
 
 def _ad_items():
     for ad in ADS:
