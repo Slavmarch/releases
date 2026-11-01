@@ -7,6 +7,7 @@ import hashlib, html, json, os, sys
 
 # 파일 내용이 바뀌면 주소 꼬리(?v=)가 바뀌어 브라우저가 옛 파일을 안 씀
 V = {}
+OUT = "."
 HIST = {}
 # 언어 (2026-10-31 사용자 'Download 옆에 Eng/Kor'): 한국어 쪽은 맨 위, 영어 쪽은 en/ 아래 같은 모양. 한 번에 한 언어씩 만듦
 L = "ko"
@@ -139,6 +140,25 @@ PRIVACY_EN = {
     "glen": "When Glen scans, it never opens file contents; it looks only at names, sizes and dates. It does not move or delete files.",
 }
 
+# 다른 사람이 만든 앱 소개 칸 (2026-11-01 현우 '동기가 만든 앱도 광고하고 싶다'): 첫 화면 앱 카드 아래에 '광고' 표시를 달고 보여 줌.
+# 비어 있으면 칸이 안 생김. 광고 회사 스크립트·추적 없음 — 그림은 assets/ads/<id>.png 로 사이트에 직접 넣음(없으면 첫 글자).
+# 고칠 것: id(영문, 바꾸지 않음) · name · url(https 만) · ko·en(소개 한두 줄) · color(대표색, 없으면 회색)
+ADS = []
+
+def ads_card():
+    rows = []
+    for ad in ADS:
+        if not str(ad.get("url", "")).startswith("https://"): continue
+        icon_path = os.path.join(OUT, "assets", "ads", ad["id"] + ".png")
+        icon = (f'<img class="ad-icon" src="{R("")}assets/ads/{ad["id"]}.png" alt="" width="44" height="44">' if os.path.exists(icon_path)
+                else f'<span class="ad-icon ad-letter" aria-hidden="true">{E(ad["name"][:1])}</span>')
+        rows.append(f'<a class="ad-row" style="--app:{ad.get("color", "#9399a1")}" href="{E(ad["url"])}" target="_blank" rel="sponsored noopener noreferrer">{icon}'
+                    f'<span class="ad-text"><span class="ad-name">{E(ad["name"])}<span class="ad-tag">{T("광고", "Ad")}</span></span>'
+                    f'<span class="ad-desc">{E(T(ad["ko"], ad["en"]))}</span></span><span class="ad-go" aria-hidden="true">↗</span></a>')
+    if not rows: return ""
+    return (f'<section class="card ad-card" aria-label="{T("광고", "Advertisement")}"><h2>{T("이런 앱도 있어요", "You might also like")}</h2>{"".join(rows)}'
+            f'<p class="note">{T("라군웍스가 만든 앱이 아니에요. 누르면 그 앱의 사이트로 가요.", "These apps are not made by Lagoonworks. Clicking opens their own site.")}</p></section>')
+
 def path_of(current):
     """이 쪽의 언어 없는 자리 (한국어 = 맨 위, 영어 = en/ 아래)."""
     return {"home": "", "download": "download/", "notes": "notes/"}.get(current, f"apps/{current}/")
@@ -243,7 +263,7 @@ def home():
         f'<a class="app-card{' hub' if a["id"] == "overmind" else ''}" style="--app:{a["color"]}" href="apps/{a["id"]}/">{f'<span class="hub-tag">{T("모두를 잇는 섬", "The hub")}</span>' if a["id"] == "overmind" else ''}<img class="app-icon" src="{R("")}assets/icons/{a["id"]}.png?v={V["icons"]}" alt="" width="52" height="52">'
         f'<span class="app-name">{E(a["name"])}</span><span class="app-desc">{DESC(a)}</span>'
         f'<span class="app-more">{T("자세히 보기", "Learn more")}<span aria-hidden="true"> →</span></span></a>' for a in APPS)
-    body = f'''<section class="card" id="apps">{H2("앱", "Apps")}<div class="app-grid">{rows}</div></section>'''
+    body = f'''<section class="card" id="apps">{H2("앱", "Apps")}<div class="app-grid">{rows}</div></section>{ads_card()}'''
     band = (f'<div class="band-text"><h1>Lagoonworks</h1><p class="band-sub">{T("화면 위 작은 섬과 함께 쓰는 데스크톱 앱들", "Desktop apps that live around a little island on your screen")}</p>'
             + BAND_EN("", "Desktop apps that live around a little island on your screen.") +
             f'<a class="band-btn" href="#apps">{T("앱 둘러보기", "Browse the apps")}</a></div>')
@@ -401,6 +421,8 @@ def load_download(out):
         if app and str(app.get("url", "")).startswith("https://"): DOWNLOAD[a["id"]] = app["url"]
 
 def main(out):
+    global OUT
+    OUT = out
     for n in ("site.css", "band.js", "appband.js", "intro.js"):
         with open(os.path.join(out, "assets", n), "rb") as f: V[n] = hashlib.sha1(f.read()).hexdigest()[:8]
     h = hashlib.sha1()

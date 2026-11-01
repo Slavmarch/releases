@@ -279,3 +279,17 @@ html.intro-on .intro { position: fixed; inset: 0; z-index: 100; display: flex; f
 .band { height: 240px; min-height: 0; }
 .band-text { display: flex; flex-direction: column; justify-content: center; align-items: flex-start; height: 100%; }
 @media (max-width: 760px) { .band { height: 312px; } .band-text { justify-content: flex-start; } }
+/* 다른 사람이 만든 앱 소개 칸 (2026-11-01) — 우리 앱 카드보다 조용하게, '광고' 표시는 늘 보이게 */
+.ad-card { display: flex; flex-direction: column; gap: 8px; }
+.ad-row { display: flex; align-items: center; gap: 14px; padding: 12px 14px; border-radius: 14px; background: var(--surface); color: var(--text); text-decoration: none;
+  border: 1px solid var(--border); transition: border-color .15s ease, background .15s ease; }
+.ad-row:hover { background: var(--hover); border-color: color-mix(in srgb, var(--app) 45%, var(--border)); }
+.ad-row:focus-visible { outline: 2px solid var(--app); outline-offset: 2px; }
+.ad-icon { flex: none; width: 44px; height: 44px; border-radius: 11px; }
+.ad-letter { display: grid; place-items: center; background: color-mix(in srgb, var(--app) 30%, var(--panel)); color: var(--text); font: 700 18px/1 var(--font-sans); }
+.ad-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; flex: 1; }
+.ad-name { display: flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 700; line-height: 22px; }
+.ad-tag { padding: 0 6px; border-radius: 5px; border: 1px solid var(--border); color: var(--muted); font-size: 11px; font-weight: 600; line-height: 17px; }
+.ad-desc { color: var(--muted); font-size: 13px; line-height: 20px; }
+.ad-go { flex: none; color: var(--muted); font-size: 18px; }
+@media (prefers-reduced-motion: reduce) { .ad-row { transition: none; } }
