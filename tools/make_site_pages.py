@@ -241,7 +241,8 @@ def intro():
     dots = "".join(f'<button class="ring-dot" type="button" aria-label="{E(a["name"])}"></button>' for a in APPS)
     return (f'<div class="intro" id="intro"><p class="intro-brand">Lagoonworks</p><p class="intro-motto">Calm tools, close at hand</p>'
             f'<div class="ring" id="ring" tabindex="0" aria-label="{T("앱 둘러보기", "Browse the apps")}">{cards}</div><div class="ring-dots">{dots}</div>'
-            f'<button class="intro-enter" id="intro-enter" type="button">{T("들어가기", "Enter")}</button></div>'
+            f'<div class="intro-doors"><button class="intro-enter" id="intro-enter" type="button">{T("데스크톱 앱 보기", "Desktop apps")}</button>'
+            f'<a class="intro-door" href="{R("./")}dialpop/"><img src="{R("./")}dialpop/icon.png" alt="" width="26" height="26">{T("휴대폰 게임 Dial Pop", "Phone game: Dial Pop")}</a></div></div>'
             f'<script type="module">import {{ start }} from "{R("./")}assets/intro.js?v={V["intro.js"]}"; start();</script>')
 
 # 글자로 쓸 때 어두운 바탕에서 대비가 모자란 대표색은 밝힌 색으로 (2026-11-01 UX 점검 — Parser 빨강 3.2:1 → 5.8:1, 가족 규칙 app-parser-text)
@@ -291,11 +292,18 @@ def BAND_EN(ko_line, en_line):
     """띠의 둘째 줄: 한국어 쪽은 영어 한 줄을 곁들임."""
     return ""      # 한국어 쪽도 영어 줄을 뺌 (2026-10-31 사용자 — 영어는 Eng 쪽에)
 
+# Dial Pop (2026-11-07 현우): 휴대폰 퍼즐 게임 — 따로 만든 쪽 dialpop/ (생성기가 안 만듦, 손으로 올림). 앱 목록에 카드 하나만 (앱 쪽·옆 목록·첫 창엔 안 넣음)
+def dialpop_card():
+    return (f'<a class="app-card" style="--app:#ffc23d" href="{R("")}dialpop/"><img class="app-icon" src="{R("")}dialpop/icon.png" alt="" width="52" height="52">'
+            f'<span class="app-name">Dial Pop</span><span class="app-desc">{T("링을 돌려 10을 만드는 휴대폰 퍼즐 게임", "Spin the rings, make 10 — a puzzle game for phones")}</span>'
+            f'<span class="app-more">{T("자세히 보기", "Learn more")}<span aria-hidden="true"> →</span></span></a>')
+
 def home():
     rows = "".join(
         f'<a class="app-card{' hub' if a["id"] == "overmind" else ''}" style="--app:{a["color"]}" href="apps/{a["id"]}/">{f'<span class="hub-tag">{T("모두를 잇는 섬", "The hub")}</span>' if a["id"] == "overmind" else ''}<img class="app-icon" src="{R("")}assets/icons/{a["id"]}.png?v={V["icons"]}" alt="" width="52" height="52">'
         f'<span class="app-name">{E(a["name"])}</span><span class="app-desc">{DESC(a)}</span>'
         f'<span class="app-more">{T("자세히 보기", "Learn more")}<span aria-hidden="true"> →</span></span></a>' for a in APPS)
+    rows += dialpop_card()
     body = f'''<section class="card" id="apps">{H2("앱", "Apps")}<div class="app-grid">{rows}</div></section>{ads_card()}'''
     band = (f'<div class="band-text"><h1>Lagoonworks</h1><p class="band-sub">{T("화면 위 작은 섬과 함께 쓰는 데스크톱 앱들", "Desktop apps that live around a little island on your screen")}</p>'
             + BAND_EN("", "Desktop apps that live around a little island on your screen.") +
