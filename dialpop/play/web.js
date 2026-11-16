@@ -16,6 +16,14 @@
   // Ranking: the web board lives in Firestore (lb/…, rules in firestore-lb.rules). false = hide the chip.
   const WEB_RANKING = true;
   window.DIALPOP_LB_LIVE = WEB_RANKING;
+  // short screens (landscape tablet, browser bars): when the HUD + board don't fit, keep the top
+  // (score, pause) on screen instead of centring the overflow off both edges
+  const fit = document.createElement('style');
+  // PC / tablet: bigger board, sitting a bit lower than the phone layout (game.html layout() reads DIALPOP_BIG)
+  const BIG_Q = '(min-width: 700px) and (min-height: 600px)';
+  window.DIALPOP_BIG = () => matchMedia(BIG_Q).matches;
+  fit.textContent = '#app{justify-content:safe center}@media ' + BIG_Q + '{#app{padding-bottom:min(60px,6vh)}}';
+  document.head.appendChild(fit);
   if (!WEB_RANKING) {
     const st = document.createElement('style');
     st.textContent = '#intro .lbAdd{display:none!important}';

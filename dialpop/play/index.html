@@ -21,19 +21,29 @@
 <link rel="stylesheet" href="fonts.css">
 <style>
 /* Dial Pop web page (build.py --web puts the document head above this).
-   The game fills the screen in game.html; under it sits one ad strip, and the description
+   The game fills the screen in game.html; under it (beside it in landscape) sits one ad slot, and the description
    follows when you scroll. Works the same on phone, tablet and desktop. */
 :root { --bg: #151c48; --panel: #1b2356; --line: rgba(255,255,255,.08); --fg: #e9ecfb; --faint: #9aa3cf; --brass: #ffc23d; --ad-h: 90px; }
 @media (max-width: 760px) { :root { --ad-h: 60px; } }
 * { box-sizing: border-box; }
 html, body { margin: 0; background: var(--bg); color: var(--fg); font-family: Lexend, "Noto Sans KR", system-ui, sans-serif; }
-#game { display: block; width: 100%; height: calc(100vh - var(--ad-h)); height: calc(100dvh - var(--ad-h)); border: 0; }
+.stage { display: flex; flex-direction: column; height: 100vh; height: 100dvh; }
+#game { display: block; width: 100%; flex: 1; min-height: 0; border: 0; }
+#adBar { flex: none; }
 /* ad strip: 728×90 on wide screens, 320×50 on phones. Kept a little apart from the board. */
 #adBar { height: var(--ad-h); display: flex; align-items: center; justify-content: center; border-top: 1px solid var(--line); background: #10163a; }
 #adBar .slot { width: 728px; max-width: calc(100% - 16px); height: 90px; display: flex; align-items: center; justify-content: center; }
 @media (max-width: 760px) { #adBar .slot { width: 320px; height: 50px; } }
 #adBar .slot.empty { border: 1px dashed rgba(255,255,255,.12); border-radius: 6px; color: rgba(255,255,255,.28); font-size: 11px; letter-spacing: .12em; }
 #adBar ins { display: block; width: 100%; height: 100%; }
+/* landscape tablets and computers: the board is laid out for portrait, so the ad moves to a side
+   column and the game gets the full height (bigger board) */
+@media (min-aspect-ratio: 5/4) and (min-width: 900px) {
+  .stage { flex-direction: row; }
+  #game { height: 100%; }
+  #adBar { width: 340px; height: auto; border-top: 0; border-left: 1px solid var(--line); }
+  #adBar .slot { width: 300px; height: min(600px, calc(100% - 32px)); }
+}
 /* description */
 main { max-width: 760px; margin: 0 auto; padding: 48px 20px 64px; line-height: 1.7; }
 main h1 { font-size: clamp(26px, 5vw, 36px); line-height: 1.2; margin: 0 0 12px; font-weight: 800; }
@@ -55,8 +65,10 @@ html[lang="ko"] [data-en] { display: none; }
 </style>
 <script>try { if (/^ko\b/i.test(navigator.language || '')) document.documentElement.lang = 'ko'; } catch (e) {}</script>
 
-<iframe id="game" src="game.html" title="Dial Pop" allow="autoplay; fullscreen; web-share; clipboard-write; identity-credentials-get"></iframe>
-<div id="adBar"><div class="slot empty" id="adSlot">ADVERTISEMENT</div></div>
+<div class="stage">
+  <iframe id="game" src="game.html" title="Dial Pop" allow="autoplay; fullscreen; web-share; clipboard-write; identity-credentials-get"></iframe>
+  <div id="adBar"><div class="slot empty" id="adSlot">ADVERTISEMENT</div></div>
+</div>
 
 <main>
   <h1 data-en>Dial Pop: <b>Make 10</b> Puzzle</h1>
@@ -119,6 +131,8 @@ html[lang="ko"] [data-en] { display: none; }
   ins.className = 'adsbygoogle';
   ins.setAttribute('data-ad-client', AD_CLIENT);
   ins.setAttribute('data-ad-slot', AD_SLOT);
+  ins.setAttribute('data-ad-format', 'auto');           // one responsive unit fills the strip or the side column
+  ins.setAttribute('data-full-width-responsive', 'false');
   slot.appendChild(ins);
   var s = document.createElement('script');
   s.async = true; s.crossOrigin = 'anonymous';

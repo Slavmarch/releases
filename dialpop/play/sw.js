@@ -2,7 +2,7 @@
 // The page itself is network-first so a new upload shows up on the next visit; scripts and icons are
 // cached up front, font slices only once the browser asks for them (Korean is split into ~130 slices
 // and a player needs a few). Other sites (Firebase, ads) are never touched.
-const VERSION = "1fff846437f4";
+const VERSION = "9c6b7bb42ba2";
 const FILES = ["./", "fonts.css", "game.html", "icons/icon-180.png", "icons/icon-192.png", "icons/icon-512.png", "icons/maskable-512.png", "manifest.webmanifest", "web.js"];
 const CACHE = 'dialpop-' + VERSION;
 
