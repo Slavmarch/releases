@@ -7,7 +7,7 @@
 <meta name="theme-color" content="#151c48">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
 <meta name="apple-mobile-web-app-title" content="Dial Pop">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="icons/icon-180.png">
@@ -17,45 +17,114 @@
 <meta property="og:url" content="https://lagoonworks.app/dialpop/play/">
 <meta property="og:image" content="https://lagoonworks.app/dialpop/play/icons/icon-512.png">
 <meta name="twitter:card" content="summary">
-<title>Dial Pop: Make 10 Puzzle</title>
-<script>
-// Dial Pop web: phones and tablets go straight to the game; a desktop browser gets the game in a
-// phone-shaped frame so it lays out exactly like on a phone. (build.py --web puts the head above this.)
-(function () {
-  var desk = matchMedia('(min-width: 760px) and (min-aspect-ratio: 3/4)').matches && matchMedia('(hover: hover) and (pointer: fine)').matches;
-  if (!desk) location.replace('game.html' + location.search + location.hash);
-})();
-</script>
+<title>Dial Pop: Make 10 Puzzle · Play free in your browser</title>
 <link rel="stylesheet" href="fonts.css">
 <style>
-:root { --bg: #10163a; --glow: #26307a; --fg: #e9ecfb; --faint: #8d97c4; --brass: #ffc23d; }
+/* Dial Pop web page (build.py --web puts the document head above this).
+   The game fills the screen in game.html; under it sits one ad strip, and the description
+   follows when you scroll. Works the same on phone, tablet and desktop. */
+:root { --bg: #151c48; --panel: #1b2356; --line: rgba(255,255,255,.08); --fg: #e9ecfb; --faint: #9aa3cf; --brass: #ffc23d; --ad-h: 90px; }
+@media (max-width: 760px) { :root { --ad-h: 60px; } }
 * { box-sizing: border-box; }
-html, body { height: 100%; margin: 0; }
-body {
-  background: radial-gradient(1200px 800px at 50% 40%, var(--glow), var(--bg) 70%) fixed, var(--bg);
-  color: var(--fg); font-family: Lexend, "Noto Sans KR", system-ui, sans-serif;
-  display: flex; align-items: center; justify-content: center; gap: 48px; overflow: hidden;
-}
-.dev {
-  height: min(calc(100vh - 48px), 940px); aspect-ratio: 9 / 19.5; border-radius: 34px; overflow: hidden;
-  background: #151c48; box-shadow: 0 0 0 1px rgba(255,255,255,.08), 0 0 0 10px #0b1030, 0 0 0 11px rgba(255,255,255,.06), 0 30px 80px rgba(0,0,0,.55);
-}
-.dev iframe { width: 100%; height: 100%; border: 0; display: block; }
-.side { width: 240px; display: flex; flex-direction: column; gap: 14px; }
-.side h1 { margin: 0; font-weight: 800; font-size: 30px; letter-spacing: .01em; }
-.side h1 b { color: var(--brass); }
-.side p { margin: 0; color: var(--faint); font-size: 14px; line-height: 1.6; }
-.side .keys { display: grid; grid-template-columns: auto 1fr; gap: 8px 12px; font-size: 13px; color: var(--faint); margin-top: 6px; }
-.side .keys span:nth-child(odd) { color: var(--fg); font-weight: 600; }
-.side a { color: var(--fg); font-size: 13px; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,.25); align-self: flex-start; }
-.side a:hover { border-color: var(--brass); }
-@media (max-width: 900px) { .side { display: none; } }
+html, body { margin: 0; background: var(--bg); color: var(--fg); font-family: Lexend, "Noto Sans KR", system-ui, sans-serif; }
+#game { display: block; width: 100%; height: calc(100vh - var(--ad-h)); height: calc(100dvh - var(--ad-h)); border: 0; }
+/* ad strip: 728×90 on wide screens, 320×50 on phones. Kept a little apart from the board. */
+#adBar { height: var(--ad-h); display: flex; align-items: center; justify-content: center; border-top: 1px solid var(--line); background: #10163a; }
+#adBar .slot { width: 728px; max-width: calc(100% - 16px); height: 90px; display: flex; align-items: center; justify-content: center; }
+@media (max-width: 760px) { #adBar .slot { width: 320px; height: 50px; } }
+#adBar .slot.empty { border: 1px dashed rgba(255,255,255,.12); border-radius: 6px; color: rgba(255,255,255,.28); font-size: 11px; letter-spacing: .12em; }
+#adBar ins { display: block; width: 100%; height: 100%; }
+/* description */
+main { max-width: 760px; margin: 0 auto; padding: 48px 20px 64px; line-height: 1.7; }
+main h1 { font-size: clamp(26px, 5vw, 36px); line-height: 1.2; margin: 0 0 12px; font-weight: 800; }
+main h1 b { color: var(--brass); }
+main h2 { font-size: 18px; margin: 36px 0 10px; }
+main p, main li { color: var(--faint); font-size: 15px; }
+main ol { padding-left: 20px; margin: 0; }
+main li { margin: 4px 0; }
+main li b, main p b { color: var(--fg); font-weight: 600; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-top: 12px; }
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; }
+.card b { display: block; color: var(--fg); margin-bottom: 4px; }
+.card span { color: var(--faint); font-size: 14px; }
+footer { border-top: 1px solid var(--line); padding: 20px; text-align: center; font-size: 13px; color: var(--faint); }
+footer a { color: var(--faint); margin: 0 8px; }
+[data-ko] { display: none; }
+html[lang="ko"] [data-ko] { display: revert; }
+html[lang="ko"] [data-en] { display: none; }
 </style>
-<div class="dev"><iframe src="game.html" title="Dial Pop" allow="autoplay; fullscreen; web-share; clipboard-write; identity-credentials-get"></iframe></div>
-<div class="side">
-  <h1>Dial <b>Pop</b></h1>
-  <p>Turn the rings. Make 10 along a line. Pop!</p>
-  <div class="keys"><span>Drag</span><span>turn a ring</span><span>10</span><span>pops the line</span></div>
-  <p>Best on a phone: open this page there and add it to your home screen.</p>
-  <a href="../">About Dial Pop</a>
-</div>
+<script>try { if (/^ko\b/i.test(navigator.language || '')) document.documentElement.lang = 'ko'; } catch (e) {}</script>
+
+<iframe id="game" src="game.html" title="Dial Pop" allow="autoplay; fullscreen; web-share; clipboard-write; identity-credentials-get"></iframe>
+<div id="adBar"><div class="slot empty" id="adSlot">ADVERTISEMENT</div></div>
+
+<main>
+  <h1 data-en>Dial Pop: <b>Make 10</b> Puzzle</h1>
+  <h1 data-ko>다이얼 팝: <b>10 만들기</b> 퍼즐</h1>
+  <p data-en>Turn the rings of a vault dial so the numbers on one line add up to 10, and they pop. Free in your browser on phone, tablet and computer. No install, no sign-up, no time limit.</p>
+  <p data-ko>금고 다이얼의 링을 돌려 한 줄의 숫자 합을 10으로 맞추면 터져요. 폰, 태블릿, 컴퓨터 브라우저에서 무료로 바로 할 수 있어요. 설치도, 가입도, 시간 제한도 없어요.</p>
+
+  <h2 data-en>How to play</h2><h2 data-ko>하는 방법</h2>
+  <ol data-en>
+    <li><b>Drag a ring</b> to turn it one notch at a time.</li>
+    <li>Numbers touching each other along a spoke that <b>add up to 10</b> pop.</li>
+    <li>New numbers drop in, and pops can <b>chain</b> for big scores.</li>
+    <li>A turn that pops nothing lights an <b>alarm</b>. Three alarms and the run ends.</li>
+  </ol>
+  <ol data-ko>
+    <li><b>링을 끌어서</b> 한 칸씩 돌려요.</li>
+    <li>한 줄에서 붙어 있는 숫자의 <b>합이 10</b>이면 터져요.</li>
+    <li>빈자리에 새 숫자가 채워지고, 이어서 터지면 <b>연쇄</b>로 점수가 커져요.</li>
+    <li>아무것도 못 터뜨리면 <b>경보</b>가 하나 켜져요. 세 번이면 판이 끝나요.</li>
+  </ol>
+
+  <h2 data-en>Two modes</h2><h2 data-ko>두 가지 모드</h2>
+  <div class="grid">
+    <div class="card"><b>CLASSIC</b><span data-en>3 rings. Big targets, easy to pick up.</span><span data-ko>링 3개. 칸이 커서 처음 하기 좋아요.</span></div>
+    <div class="card"><b>MASTER</b><span data-en>4 rings. More numbers to juggle, harder to survive.</span><span data-ko>링 4개. 볼 숫자가 많아 더 어려워요.</span></div>
+  </div>
+
+  <h2 data-en>Leaderboard</h2><h2 data-ko>순위표</h2>
+  <p data-en>Anyone can see the weekly and all-time boards. To put your own score on them, sign in with Google from the Ranking screen. Your name shows as an automatic Hunter#1234 tag, never your real name.</p>
+  <p data-ko>주간·역대 순위표는 누구나 볼 수 있어요. 내 점수를 올리고 싶으면 Ranking 화면에서 Google로 로그인하면 돼요. 이름은 실명 대신 Hunter#1234 같은 자동 이름으로 나와요.</p>
+
+  <h2 data-en>Tips</h2><h2 data-ko>팁</h2>
+  <ul data-en>
+    <li>Look for pairs first (1+9, 2+8, 3+7, 4+6, 5+5), then longer lines.</li>
+    <li>A turn that lines up two pops at once keeps the alarm quiet.</li>
+    <li>On a phone, add this page to your home screen to play it like an app, even offline.</li>
+  </ul>
+  <ul data-ko>
+    <li>먼저 두 숫자 짝(1+9, 2+8, 3+7, 4+6, 5+5)을 찾고, 그다음 긴 줄을 노려요.</li>
+    <li>한 번 돌려서 두 줄을 같이 터뜨리면 경보 걱정이 줄어요.</li>
+    <li>폰에서는 이 페이지를 홈 화면에 추가하면 앱처럼, 인터넷 없이도 할 수 있어요.</li>
+  </ul>
+</main>
+<footer>
+  <a href="../">Dial Pop</a>
+  <a href="../privacy.html" data-en>Privacy</a><a href="../privacy-ko.html" data-ko>개인정보 처리방침</a>
+  <a href="../terms.html" data-en>Terms</a><a href="../terms-ko.html" data-ko>이용약관</a>
+  <span>© Lagoonworks</span>
+</footer>
+
+<script>
+// Banner ad: build.py fills AD_CLIENT / AD_SLOT (DIALPOP_WEB_ADS, DIALPOP_WEB_AD_SLOT). Empty = the
+// dashed placeholder stays.
+(function () {
+  var AD_CLIENT = '', AD_SLOT = '';
+  if (!AD_CLIENT || !AD_SLOT) return;
+  var slot = document.getElementById('adSlot');
+  slot.className = 'slot'; slot.textContent = '';
+  var ins = document.createElement('ins');
+  ins.className = 'adsbygoogle';
+  ins.setAttribute('data-ad-client', AD_CLIENT);
+  ins.setAttribute('data-ad-slot', AD_SLOT);
+  slot.appendChild(ins);
+  var s = document.createElement('script');
+  s.async = true; s.crossOrigin = 'anonymous';
+  s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=' + AD_CLIENT;
+  s.onerror = function () { slot.className = 'slot empty'; slot.textContent = ''; };
+  document.head.appendChild(s);
+  (window.adsbygoogle = window.adsbygoogle || []).push({});
+})();
+</script>
