@@ -36,6 +36,9 @@ html, body { margin: 0; background: var(--bg); color: var(--fg); font-family: Le
 @media (max-width: 760px) { #adBar .slot { width: 320px; height: 50px; } }
 #adBar .slot.empty { border: 1px dashed rgba(255,255,255,.12); border-radius: 6px; color: rgba(255,255,255,.28); font-size: 11px; letter-spacing: .12em; }
 #adBar ins { display: inline-block; }
+/* no ad to show (Google marks the unit "unfilled", or the script is blocked): drop the strip/column so the
+   game gets the whole screen instead of an empty panel */
+#adBar.none, #adBar:has(ins[data-ad-status="unfilled"]) { display: none; }
 /* landscape tablets and computers: the board is laid out for portrait, so the ad moves to a side
    column and the game gets the full height (bigger board) */
 @media (min-aspect-ratio: 5/4) and (min-width: 900px) {
@@ -147,7 +150,7 @@ html[lang="ko"] [data-en] { display: none; }
   var s = document.createElement('script');
   s.async = true; s.crossOrigin = 'anonymous';
   s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=' + AD_CLIENT;
-  s.onerror = function () { slot.className = 'slot empty'; slot.textContent = ''; };
+  s.onerror = function () { document.getElementById('adBar').className = 'none'; };
   document.head.appendChild(s);
   (window.adsbygoogle = window.adsbygoogle || []).push({});
 })();
