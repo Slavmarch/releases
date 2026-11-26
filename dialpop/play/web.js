@@ -11,8 +11,8 @@
 // the web gets its own Firestore board instead (DIALPOP_LB_LIVE).
 (function () {
   if (window.Capacitor && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform()) return;
-  const WEB_AD_CLIENT = '';      // set by build.py --web (DIALPOP_WEB_ADS)
-  const WEB_AD_TEST = true;      // data-adbreak-test="on" until the site is approved for H5 games ads
+  const WEB_AD_CLIENT = 'ca-pub-3455429014217845';      // set by build.py --web (DIALPOP_WEB_ADS)
+  const WEB_AD_TEST = false;      // data-adbreak-test="on" until the site is approved for H5 games ads
   // Ranking: the web board lives in Firestore (lb/…, rules in firestore-lb.rules). false = hide the chip.
   const WEB_RANKING = true;
   window.DIALPOP_LB_LIVE = WEB_RANKING;
