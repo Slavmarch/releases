@@ -35,7 +35,7 @@ html, body { margin: 0; background: var(--bg); color: var(--fg); font-family: Le
 #adBar .slot { width: 728px; max-width: calc(100% - 16px); height: 90px; display: flex; align-items: center; justify-content: center; }
 @media (max-width: 760px) { #adBar .slot { width: 320px; height: 50px; } }
 #adBar .slot.empty { border: 1px dashed rgba(255,255,255,.12); border-radius: 6px; color: rgba(255,255,255,.28); font-size: 11px; letter-spacing: .12em; }
-#adBar ins { display: block; width: 100%; height: 100%; }
+#adBar ins { display: inline-block; }
 /* landscape tablets and computers: the board is laid out for portrait, so the ad moves to a side
    column and the game gets the full height (bigger board) */
 @media (min-aspect-ratio: 5/4) and (min-width: 900px) {
@@ -131,8 +131,18 @@ html[lang="ko"] [data-en] { display: none; }
   ins.className = 'adsbygoogle';
   ins.setAttribute('data-ad-client', AD_CLIENT);
   ins.setAttribute('data-ad-slot', AD_SLOT);
-  ins.setAttribute('data-ad-format', 'auto');           // one responsive unit fills the strip or the side column
-  ins.setAttribute('data-full-width-responsive', 'false');
+  // Fixed size, not data-ad-format=auto: a responsive unit makes Google set "height:auto !important" on the
+  // page's boxes, which collapsed the game frame on PC (2026-11-26). Size is picked once, from the layout.
+  var side = matchMedia('(min-aspect-ratio: 5/4) and (min-width: 900px)').matches;
+  var phone = matchMedia('(max-width: 760px)').matches;
+  var w = side ? 300 : phone ? 320 : 728, h = side ? 600 : phone ? 50 : 90;
+  if (side && innerHeight < 680) h = 250;
+  ins.style.cssText = 'display:inline-block;width:' + w + 'px;height:' + h + 'px';
+  // safety net: if the ad script still writes a height onto the page boxes, take it off again
+  var boxes = [document.documentElement, document.body, document.querySelector('.stage'), document.getElementById('adBar'), slot];
+  new MutationObserver(function () {
+    boxes.forEach(function (b) { if (b && (b.style.height || b.style.minHeight)) { b.style.removeProperty('height'); b.style.removeProperty('min-height'); } });
+  }).observe(document.documentElement, { subtree: true, attributes: true, attributeFilter: ['style'] });
   slot.appendChild(ins);
   var s = document.createElement('script');
   s.async = true; s.crossOrigin = 'anonymous';
